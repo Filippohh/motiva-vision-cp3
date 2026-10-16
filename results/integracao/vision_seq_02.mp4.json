@@ -1,0 +1,85 @@
+{
+  "seq_02.mp4": {
+    "video": "seq_02.mp4",
+    "camera_id": "CAM-SP000-KM112-R",
+    "quadros": 240,
+    "fps": 30.0,
+    "tempo_proc_s": 1.43,
+    "eventos": [
+      {
+        "schema": "motiva.evento.v1",
+        "event_id": "EVT-20261015-195433-KM112-1789",
+        "versao": 1,
+        "timestamp": "2026-10-15T19:54:33-03:00",
+        "camera_id": "CAM-SP000-KM112-R",
+        "local": {
+          "rodovia": "SP-000 (fictícia)",
+          "km": 112.4,
+          "trecho": "Pista dupla, km 112-113",
+          "municipio": "Cidade Exemplo/SP"
+        },
+        "tipo": "COLISAO_FRONTAL",
+        "confianca": {
+          "valor": 1.0,
+          "nivel": "ALTA",
+          "limiar": 0.6,
+          "componentes": {
+            "aprox": 1.0,
+            "impacto": 1.0,
+            "persist": 1.0,
+            "clareza": 0.999
+          },
+          "definicao": "0..1 = soma ponderada (aprox 0,25; impacto 0,30; persistência 0,20; clareza do ângulo 0,25) x (0,4 + 0,6 x visibilidade). ALTA >= 0,80; MEDIA >= 0,60; BAIXA < 0,60 -> INDETERMINADO."
+        },
+        "indicadores": {
+          "veiculos_envolvidos": 2,
+          "faixa_obstruida": [
+            "F2-OESTE"
+          ],
+          "velocidade_relativa_kmh": 68.4,
+          "impacto_alta_energia": true,
+          "veiculos_parados_apos_contato": true,
+          "angulo_trajetorias_graus": 180.0,
+          "pedestres": "desconhecido",
+          "visibilidade": 1.0
+        },
+        "recomendacao": {
+          "regra": "R2",
+          "recurso": "AVALIACAO_PRIORITARIA_RESGATE",
+          "justificativa": "Sugerir avaliação prioritária e recurso adicional de resgate (simulação). Regra R2: Colisão frontal OU colisão com 3+ veículos envolvidos. Indicadores: vel. relativa estimada 68 km/h; faixa obstruída: F2-OESTE; veículos envolvidos: 2."
+        },
+        "estado": "SUSPEITA",
+        "evidencia": {
+          "fonte": "seq_02.mp4",
+          "frame": 107,
+          "tempo_video_s": 3.57,
+          "frame_decisao": 127,
+          "imagem": "evidencias/EVT-20261015-195433-KM112-1789.jpg",
+          "clip": "evidencias/EVT-20261015-195433-KM112-1789.mp4"
+        }
+      }
+    ],
+    "candidatos": [
+      {
+        "frame_contato": 107,
+        "trilhas": [
+          2,
+          3
+        ],
+        "componentes": {
+          "aprox": 1.0,
+          "impacto": 1.0,
+          "persist": 1.0,
+          "clareza": 0.999
+        },
+        "base": 1.0,
+        "visibilidade": 1.0,
+        "confianca": 1.0,
+        "tipo_angulo": "COLISAO_FRONTAL",
+        "angulo_graus": 180.0,
+        "metodo": "trajetorias"
+      }
+    ],
+    "saida": "COLISAO_FRONTAL"
+  }
+}

@@ -1,0 +1,85 @@
+{
+  "seq_06.mp4": {
+    "video": "seq_06.mp4",
+    "camera_id": "CAM-SP000-KM112-R",
+    "quadros": 270,
+    "fps": 30.0,
+    "tempo_proc_s": 1.56,
+    "eventos": [
+      {
+        "schema": "motiva.evento.v1",
+        "event_id": "EVT-20261015-195424-KM112-E638",
+        "versao": 1,
+        "timestamp": "2026-10-15T19:54:24-03:00",
+        "camera_id": "CAM-SP000-KM112-R",
+        "local": {
+          "rodovia": "SP-000 (fictícia)",
+          "km": 112.4,
+          "trecho": "Pista dupla, km 112-113",
+          "municipio": "Cidade Exemplo/SP"
+        },
+        "tipo": "COLISAO_TRASEIRA",
+        "confianca": {
+          "valor": 0.903,
+          "nivel": "ALTA",
+          "limiar": 0.6,
+          "componentes": {
+            "aprox": 1.0,
+            "impacto": 1.0,
+            "persist": 0.545,
+            "clareza": 0.999
+          },
+          "definicao": "0..1 = soma ponderada (aprox 0,25; impacto 0,30; persistência 0,20; clareza do ângulo 0,25) x (0,4 + 0,6 x visibilidade). ALTA >= 0,80; MEDIA >= 0,60; BAIXA < 0,60 -> INDETERMINADO."
+        },
+        "indicadores": {
+          "veiculos_envolvidos": 2,
+          "faixa_obstruida": [
+            "F3-LESTE"
+          ],
+          "velocidade_relativa_kmh": 28.8,
+          "impacto_alta_energia": false,
+          "veiculos_parados_apos_contato": true,
+          "angulo_trajetorias_graus": 0.1,
+          "pedestres": "desconhecido",
+          "visibilidade": 0.99
+        },
+        "recomendacao": {
+          "regra": "R4",
+          "recurso": "EQUIPE_OPERACIONAL_E_SINALIZACAO",
+          "justificativa": "Solicitar equipe operacional e sinalização/guincho para liberar a faixa. Regra R4: Colisão lateral/traseira sem alta energia, com faixa obstruída. Indicadores: vel. relativa estimada 29 km/h; faixa obstruída: F3-LESTE; veículos envolvidos: 2."
+        },
+        "estado": "SUSPEITA",
+        "evidencia": {
+          "fonte": "seq_06.mp4",
+          "frame": 120,
+          "tempo_video_s": 4.0,
+          "frame_decisao": 140,
+          "imagem": "evidencias/EVT-20261015-195424-KM112-E638.jpg",
+          "clip": "evidencias/EVT-20261015-195424-KM112-E638.mp4"
+        }
+      }
+    ],
+    "candidatos": [
+      {
+        "frame_contato": 120,
+        "trilhas": [
+          2,
+          3
+        ],
+        "componentes": {
+          "aprox": 1.0,
+          "impacto": 1.0,
+          "persist": 0.545,
+          "clareza": 0.999
+        },
+        "base": 0.909,
+        "visibilidade": 0.99,
+        "confianca": 0.903,
+        "tipo_angulo": "COLISAO_TRASEIRA",
+        "angulo_graus": 0.1,
+        "metodo": "trajetorias"
+      }
+    ],
+    "saida": "COLISAO_TRASEIRA"
+  }
+}

@@ -1,0 +1,6 @@
+# Versões testadas (Python 3.13, Windows 11). Também funciona com opencv-python 4.8+.
+opencv-python-headless==5.0.0.93
+numpy==2.2.4
+paho-mqtt==1.6.1
+Flask==3.1.3
+amqtt==0.12.1   # opcional: broker local para testes offline / teste de broker indisponível

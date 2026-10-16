@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Central Motiva Vision</title>
+<style>
+  :root { --bg:#f4f5f7; --card:#fff; --tx:#1d2330; --mut:#667085; --bd:#d9dde3;
+          --ok:#12805c; --warn:#b7791f; --bad:#c0262d; --info:#2557d6; --fail:#6b3fa0; }
+  * { box-sizing:border-box; }
+  body { margin:0; font:14px/1.45 system-ui, Segoe UI, sans-serif; background:var(--bg); color:var(--tx); }
+  header { background:#16202e; color:#fff; padding:12px 18px; display:flex; gap:18px; align-items:center; flex-wrap:wrap; }
+  header h1 { font-size:17px; margin:0 12px 0 0; }
+  .badge { display:inline-block; padding:2px 9px; border-radius:10px; font-weight:600; font-size:12px; }
+  .b-ok{background:#d3f2e5;color:var(--ok)} .b-bad{background:#fbd9da;color:var(--bad)}
+  .b-warn{background:#fdeccb;color:var(--warn)} .b-info{background:#dbe5fb;color:var(--info)}
+  .b-mut{background:#e7e9ee;color:var(--mut)} .b-fail{background:#eadff6;color:var(--fail)}
+  header .meta { color:#b8c2d3; font-size:12px; }
+  main { display:grid; grid-template-columns: 380px 1fr; gap:14px; padding:14px; }
+  @media (max-width:900px){ main{grid-template-columns:1fr} }
+  .card { background:var(--card); border:1px solid var(--bd); border-radius:8px; padding:12px 14px; }
+  h2 { font-size:14px; margin:0 0 8px; text-transform:uppercase; letter-spacing:.04em; color:var(--mut); }
+  .oc { border:1px solid var(--bd); border-radius:6px; padding:8px 10px; margin-bottom:8px; cursor:pointer; }
+  .oc.sel { border-color:var(--info); box-shadow:0 0 0 2px #dbe5fb; }
+  .oc .id { font-family:ui-monospace,Consolas,monospace; font-size:12px; color:var(--mut); }
+  table { width:100%; border-collapse:collapse; font-size:13px; }
+  td,th { border-bottom:1px solid var(--bd); padding:4px 6px; text-align:left; vertical-align:top; }
+  th { color:var(--mut); font-weight:600; }
+  .grid2 { display:grid; grid-template-columns: 1fr 1fr; gap:12px; }
+  @media (max-width:1200px){ .grid2{grid-template-columns:1fr} }
+  img.ev { width:100%; border-radius:6px; border:1px solid var(--bd); }
+  button { font:inherit; padding:7px 14px; border-radius:6px; border:1px solid transparent; cursor:pointer; font-weight:600; }
+  button:disabled { opacity:.4; cursor:not-allowed; }
+  .btn-c{background:var(--bad);color:#fff} .btn-r{background:#fff;border-color:var(--bd)} .btn-e{background:var(--ok);color:#fff}
+  .btn-t{background:#fff;border-color:var(--bd);font-weight:400;font-size:12px}
+  .rec { background:#fff8e6; border:1px solid #f1d58d; border-radius:6px; padding:8px 10px; margin:8px 0; }
+  .muted{color:var(--mut)} .mono{font-family:ui-monospace,Consolas,monospace;font-size:12px}
+  .log { max-height:260px; overflow:auto; font-family:ui-monospace,Consolas,monospace; font-size:11.5px; }
+  .log div { border-bottom:1px dotted var(--bd); padding:2px 0; word-break:break-all; }
+  .actions { display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin:10px 0; }
+  input[type=text]{ font:inherit; padding:6px 8px; border:1px solid var(--bd); border-radius:6px; width:160px; }
+  .disclaimer { font-size:12px; color:var(--mut); margin-top:6px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Central Motiva Vision</h1>
+  <span>Broker: <span id="hb-broker" class="badge b-mut">…</span></span>
+  <span>ESP32: <span id="hb-esp" class="badge b-mut">…</span></span>
+  <span>Estado ESP32: <span id="hb-espst" class="badge b-mut">…</span></span>
+  <span class="meta" id="hb-last"></span>
+  <span class="meta" style="margin-left:auto">{{ broker }} · {{ topic }}/# · <a style="color:#9fc0ff" href="/api/export.csv">CSV</a> · <a style="color:#9fc0ff" href="/api/export.json">JSON</a></span>
+</header>
+<main>
+  <section>
+    <div class="card" style="margin-bottom:14px">
+      <h2>Câmeras (monitoramento)</h2>
+      <div id="cams" class="muted">Sem mensagens da visão ainda.</div>
+    </div>
+    <div class="card">
+      <h2>Ocorrências</h2>
+      <div id="list" class="muted">Nenhuma ocorrência registrada.</div>
+    </div>
+  </section>
+  <section>
+    <div class="card" id="detail"><span class="muted">Selecione uma ocorrência.</span></div>
+    <div class="card" style="margin-top:14px">
+      <h2>Mensagens MQTT (últimas 40)</h2>
+      <div class="log" id="log"></div>
+    </div>
+  </section>
+</main>
+<script>
+const ESTADO_CLS = {SUSPEITA:'b-warn', CONFIRMADO:'b-bad', REJEITADO:'b-mut', ENCERRADO:'b-ok'};
+const ESP_CLS = {NORMAL:'b-ok', SUSPEITA:'b-warn', CONFIRMADO:'b-bad', FALHA:'b-fail', OFFLINE:'b-fail'};
+const CMD_CLS = {ENVIADO:'b-info', RECEBIDO:'b-warn', APLICADO:'b-ok', SEM_CONFIRMACAO:'b-bad', IGNORADO_PELO_ESP32:'b-mut'};
+let sel = null, last = null;
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const hm = iso => iso ? iso.substring(11,19) : '-';
+try { document.getElementById && (window._op = localStorage.getItem('operador') || 'operador1'); } catch(e) { window._op = 'operador1'; }
+
+async function refresh(){
+  try {
+    const r = await fetch('/api/state'); last = await r.json(); render();
+  } catch(e) { document.getElementById('hb-broker').textContent = 'central offline'; }
+}
+function badge(id, txt, cls){ const e=document.getElementById(id); e.textContent=txt; e.className='badge '+cls; }
+function render(){
+  const s = last;
+  badge('hb-broker', s.broker_conectado ? 'conectado' : 'desconectado', s.broker_conectado ? 'b-ok':'b-bad');
+  const e = s.esp32;
+  badge('hb-esp', e.online ? 'online' : 'sem contato', e.online ? 'b-ok':'b-bad');
+  badge('hb-espst', e.estado, ESP_CLS[e.estado] || 'b-mut');
+  document.getElementById('hb-last').textContent = 'último contato ESP32: ' + (e.ultimo_contato ? hm(e.ultimo_contato) + ' (' + e.segundos_sem_contato + ' s)' : 'nunca');
+
+  const cams = Object.values(s.visao);
+  document.getElementById('cams').innerHTML = cams.length ? cams.map(c =>
+    `<div><b>${esc(c.camera_id)}</b> · ${esc(c.fonte)} t=${esc(c.tempo_video_s)} s · visib. ${esc(c.visibilidade)} ·
+     <span class="badge ${c.saida==='SEM_ACIDENTE'?'b-ok':'b-warn'}">${esc(c.saida)}</span> <span class="muted">${hm(c.timestamp)}</span></div>`).join('') :
+     '<span class="muted">Sem mensagens da visão ainda.</span>';
+
+  const list = document.getElementById('list');
+  if (!s.ocorrencias.length) list.innerHTML = '<span class="muted">Nenhuma ocorrência registrada.</span>';
+  else list.innerHTML = s.ocorrencias.map(o => `
+    <div class="oc ${o.event_id===sel?'sel':''}" onclick="sel='${esc(o.event_id)}';render()">
+      <div><b>${esc(o.tipo)}</b> <span class="badge ${ESTADO_CLS[o.estado]||'b-mut'}">${esc(o.estado)}</span>
+      <span class="muted">conf ${Number(o.confianca).toFixed(2)}</span></div>
+      <div class="id">${esc(o.event_id)} · v${o.versao}</div>
+      <div class="muted">${esc(o.camera_id)} · ${hm(o.recebido_em)} · ${esc(o.regra)}</div>
+    </div>`).join('');
+  if (!sel && s.ocorrencias.length) sel = s.ocorrencias[0].event_id;
+  renderDetail();
+  document.getElementById('log').innerHTML = s.mensagens.map(m =>
+    `<div><b>${hm(m.ts)} ${esc(m.direcao)}</b> ${esc(m.topico)} ${esc(m.payload.length>400?m.payload.substring(0,400)+'…':m.payload)}</div>`).join('');
+}
+function renderDetail(){
+  const o = last.ocorrencias.find(x => x.event_id === sel);
+  const d = document.getElementById('detail');
+  if (!o) { d.innerHTML = '<span class="muted">Selecione uma ocorrência.</span>'; return; }
+  if (document.activeElement && document.activeElement.id === 'op') return; // não apaga o que o operador digita
+  const sig = JSON.stringify(o);
+  if (sig === window._lastSig) return;   // só redesenha quando a ocorrência muda (evita piscar a evidência)
+  window._lastSig = sig;
+  const p = o.payload, c = p.confianca || {}, ind = p.indicadores || {}, ev = p.evidencia || {}, rec = p.recomendacao || {};
+  const loc = p.local || {};
+  const indRows = Object.entries(ind).map(([k,v]) => `<tr><th>${esc(k)}</th><td>${esc(typeof v==='object'?JSON.stringify(v):v)}</td></tr>`).join('');
+  const comp = Object.entries(c.componentes||{}).map(([k,v])=>`${esc(k)}=${v}`).join(' · ');
+  const cmds = o.comandos.map(x => `<tr><td class="mono">${esc(x.command_id)}</td><td>${esc(x.acao)}</td>
+      <td><span class="badge ${CMD_CLS[x.status]||'b-mut'}">${esc(x.status)}</span></td><td>${x.tentativas}</td>
+      <td>${hm(x.enviado_em)}</td><td>${hm(x.recebido_em)}</td><td>${hm(x.aplicado_em)}</td></tr>`).join('');
+  const acs = o.acoes.map(a => `<tr><td>${hm(a.ts)}</td><td>${esc(a.acao)}</td><td>${esc(a.operador)}</td><td>${esc(a.observacao)}</td></tr>`).join('');
+  d.innerHTML = `
+    <h2>Ocorrência <span class="mono">${esc(o.event_id)}</span> (versão ${o.versao})</h2>
+    <div class="grid2">
+      <div>
+        <div style="font-size:20px;font-weight:700">${esc(p.tipo)} <span class="badge ${ESTADO_CLS[o.estado]||'b-mut'}">${esc(o.estado)}</span></div>
+        <div>Confiança <b>${Number(c.valor).toFixed(2)}</b> (${esc(c.nivel)}; limiar ${esc(c.limiar)}) <span class="muted">${comp}</span></div>
+        <div>Local: <b>${esc(loc.rodovia)} km ${esc(loc.km)}</b> — ${esc(loc.trecho)} · câmera ${esc(p.camera_id)}</div>
+        <div class="muted">Detectado ${esc(p.timestamp)} · fonte ${esc(ev.fonte)} · t=${esc(ev.tempo_video_s)} s (quadro ${esc(ev.frame)})</div>
+        <div class="rec"><b>Recomendação simulada (${esc(rec.regra)}): ${esc(rec.recurso)}</b><br>${esc(rec.justificativa)}
+          <div class="disclaimer">Regras fictícias de simulação acadêmica: não é diagnóstico nem acionamento de serviço real. Decisão do operador.</div></div>
+        <div class="actions">
+          <label>Operador <input type="text" id="op" value="${esc(window._op)}"></label>
+          <button class="btn-c" ${o.estado!=='SUSPEITA'?'disabled':''} onclick="act('CONFIRMAR')">CONFIRMAR</button>
+          <button class="btn-r" ${o.estado!=='SUSPEITA'?'disabled':''} onclick="act('REJEITAR')">REJEITAR</button>
+          <button class="btn-e" ${o.estado!=='CONFIRMADO'?'disabled':''} onclick="act('ENCERRAR')">ENCERRAR</button>
+          <button class="btn-t" onclick="act('REENVIAR')" title="Reenvia o último command_id para testar a proteção contra duplicatas">reenviar último comando (teste)</button>
+        </div>
+      </div>
+      <div>${ev.imagem ? `<a href="/${esc(ev.imagem)}" target="_blank"><img class="ev" src="/${esc(ev.imagem)}?v=${o.versao}" alt="evidência"></a>` : ''}
+        ${ev.clip ? `<div><a href="/${esc(ev.clip)}" target="_blank">trecho do vídeo (mp4)</a></div>` : ''}</div>
+    </div>
+    <h2 style="margin-top:12px">Indicadores</h2><table>${indRows}</table>
+    <h2 style="margin-top:12px">Comandos ao ESP32 (enviado ≠ confirmado)</h2>
+    <table><tr><th>command_id</th><th>ação</th><th>status</th><th>tent.</th><th>enviado</th><th>recebido</th><th>aplicado</th></tr>${cmds}</table>
+    <h2 style="margin-top:12px">Histórico de ações</h2>
+    <table><tr><th>hora</th><th>ação</th><th>por</th><th>obs.</th></tr>${acs}</table>`;
+}
+async function act(acao){
+  const op = (document.getElementById('op')||{}).value || 'operador';
+  window._op = op; try { localStorage.setItem('operador', op); } catch(e) {}
+  const r = await fetch(`/api/ocorrencias/${encodeURIComponent(sel)}/acao`, {method:'POST', headers:{'Content-Type':'application/json'},
+    body: JSON.stringify({acao, operador: op})});
+  const j = await r.json(); if (!r.ok) alert(j.erro || 'erro');
+  document.activeElement && document.activeElement.blur();
+  refresh();
+}
+refresh(); setInterval(refresh, 1000);
+</script>
+</body>
+</html>

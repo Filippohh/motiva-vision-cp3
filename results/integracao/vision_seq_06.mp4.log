@@ -1,0 +1,5 @@
+== seq_06.mp4 (CAM-SP000-KM112-R)
+  candidato f=120 trilhas=2,3 {'aprox': 1.0, 'impacto': 1.0, 'persist': 0.5454545454545454, 'clareza': 0.9988193248121058} base=0.91 q=0.99 conf=0.90 -> COLISAO_TRASEIRA ang=0.05313038345523813
+  >>> EVENTO EVT-20261015-195424-KM112-E638 v1 tipo=COLISAO_TRASEIRA conf=0.90 t=4.00s regra=R4
+   saída: COLISAO_TRASEIRA  eventos=1  (270 quadros em 1.56 s)
+resultados em C:\CP3-MORGS\results\integracao\vision_seq_06.mp4.json

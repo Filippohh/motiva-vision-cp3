@@ -1,0 +1,171 @@
+{
+  "total": 18,
+  "passou": 18,
+  "verificacoes": [
+    {
+      "teste": "Integração",
+      "verificacao": "central conectada, ESP32 online e em NORMAL",
+      "ok": true,
+      "evidencia": "ESP32 estado=NORMAL"
+    },
+    {
+      "teste": "Três categorias / integração",
+      "verificacao": "evento da visão chega à central",
+      "ok": true,
+      "evidencia": "EVT-20261015-195424-KM112-E638 tipo=COLISAO_TRASEIRA"
+    },
+    {
+      "teste": "Integração completa",
+      "verificacao": "comando SUSPEITA aplicado pelo ESP32 (sinal preliminar amarelo)",
+      "ok": true,
+      "evidencia": "cmd=CMD-24F5A582 status=APLICADO"
+    },
+    {
+      "teste": "Confirmação e rejeição",
+      "verificacao": "CONFIRMAR registrado e ESP32 em CONFIRMADO; enviado != aplicado registrado",
+      "ok": true,
+      "evidencia": "CMD-87032D5B enviado=2026-10-15T19:54:26-03:00 recebido=2026-10-15T19:54:26-03:00 aplicado=2026-10-15T19:54:26-03:00"
+    },
+    {
+      "teste": "Comando duplicado",
+      "verificacao": "reenvio do mesmo command_id não repete atuação (ACK DUPLICADO)",
+      "ok": true,
+      "evidencia": "ações=['REENVIO_MANUAL_TESTE_DUPLICATA', 'ESP32_DUPLICATA_DESCARTADA']"
+    },
+    {
+      "teste": "Encerramento",
+      "verificacao": "ENCERRAR leva ESP32 de volta a NORMAL",
+      "ok": true,
+      "evidencia": "estado central=ENCERRADO"
+    },
+    {
+      "teste": "Comando duplicado",
+      "verificacao": "comando para evento encerrado não reabre a ocorrência",
+      "ok": true,
+      "evidencia": "estado ESP32=NORMAL"
+    },
+    {
+      "teste": "Duplicatas",
+      "verificacao": "evento repetido (mesmo event_id/versão) não gera nova ocorrência",
+      "ok": true,
+      "evidencia": "ocorrências com esse id=1"
+    },
+    {
+      "teste": "Confirmação e rejeição",
+      "verificacao": "REJEITAR registrado e ESP32 volta a NORMAL",
+      "ok": true,
+      "evidencia": "EVT-20261015-195433-KM112-1789 tipo=COLISAO_FRONTAL"
+    },
+    {
+      "teste": "Trânsito sem acidente",
+      "verificacao": "vídeo de frenagem/parada não gera ocorrência",
+      "ok": true,
+      "evidencia": "saida=SEM_ACIDENTE"
+    },
+    {
+      "teste": "Ocorrência persistente / visibilidade",
+      "verificacao": "neblina -> INDETERMINADO; publicações com um único event_id",
+      "ok": true,
+      "evidencia": "publicações=2 ids=1 regra=R1"
+    },
+    {
+      "teste": "Broker indisponível",
+      "verificacao": "ESP32 indica FALHA ao perder o broker",
+      "ok": true,
+      "evidencia": "estado=FALHA"
+    },
+    {
+      "teste": "Broker indisponível",
+      "verificacao": "central exibe broker desconectado",
+      "ok": true,
+      "evidencia": ""
+    },
+    {
+      "teste": "Broker indisponível",
+      "verificacao": "ESP32 reconecta e volta a NORMAL sem reiniciar",
+      "ok": true,
+      "evidencia": "recuperou em 2.1 s"
+    },
+    {
+      "teste": "Broker indisponível",
+      "verificacao": "central volta a ver o ESP32 online",
+      "ok": true,
+      "evidencia": ""
+    },
+    {
+      "teste": "Heartbeat / timeout",
+      "verificacao": "sem PING da central por >15 s o ESP32 indica FALHA",
+      "ok": true,
+      "evidencia": "após 9.9 s"
+    },
+    {
+      "teste": "Heartbeat / timeout",
+      "verificacao": "central de volta -> ESP32 retorna a NORMAL",
+      "ok": true,
+      "evidencia": ""
+    },
+    {
+      "teste": "Histórico",
+      "verificacao": "histórico preservado após reiniciar a central (SQLite)",
+      "ok": true,
+      "evidencia": "ocorrências=3"
+    }
+  ],
+  "transicoes_esp32": [
+    [
+      "19:54:18",
+      "FALHA",
+      "NORMAL"
+    ],
+    [
+      "19:54:24",
+      "NORMAL",
+      "SUSPEITA"
+    ],
+    [
+      "19:54:26",
+      "SUSPEITA",
+      "CONFIRMADO"
+    ],
+    [
+      "19:54:28",
+      "CONFIRMADO",
+      "NORMAL"
+    ],
+    [
+      "19:54:33",
+      "NORMAL",
+      "SUSPEITA"
+    ],
+    [
+      "19:54:35",
+      "SUSPEITA",
+      "NORMAL"
+    ],
+    [
+      "19:54:41",
+      "NORMAL",
+      "SUSPEITA"
+    ],
+    [
+      "19:54:44",
+      "SUSPEITA",
+      "FALHA"
+    ],
+    [
+      "19:54:49",
+      "FALHA",
+      "NORMAL"
+    ],
+    [
+      "19:54:59",
+      "NORMAL",
+      "FALHA"
+    ],
+    [
+      "19:55:00",
+      "FALHA",
+      "NORMAL"
+    ]
+  ]
+}

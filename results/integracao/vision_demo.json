@@ -1,0 +1,87 @@
+{
+  "seq_07.mp4": {
+    "video": "seq_07.mp4",
+    "camera_id": "CAM-SP000-KM118-X",
+    "quadros": 260,
+    "fps": 30.0,
+    "tempo_proc_s": 1.55,
+    "eventos": [
+      {
+        "schema": "motiva.evento.v1",
+        "event_id": "EVT-20261015-195745-KM118-6B5F",
+        "versao": 1,
+        "timestamp": "2026-10-15T19:57:45-03:00",
+        "camera_id": "CAM-SP000-KM118-X",
+        "local": {
+          "rodovia": "SP-000 (fictícia)",
+          "km": 118.0,
+          "trecho": "Interseção com acesso municipal",
+          "municipio": "Cidade Exemplo/SP"
+        },
+        "tipo": "COLISAO_LATERAL",
+        "confianca": {
+          "valor": 0.981,
+          "nivel": "ALTA",
+          "limiar": 0.6,
+          "componentes": {
+            "aprox": 1.0,
+            "impacto": 1.0,
+            "persist": 0.909,
+            "clareza": 0.998
+          },
+          "definicao": "0..1 = soma ponderada (aprox 0,25; impacto 0,30; persistência 0,20; clareza do ângulo 0,25) x (0,4 + 0,6 x visibilidade). ALTA >= 0,80; MEDIA >= 0,60; BAIXA < 0,60 -> INDETERMINADO."
+        },
+        "indicadores": {
+          "veiculos_envolvidos": 2,
+          "faixa_obstruida": [
+            "H-OESTE",
+            "V-SUL",
+            "V-NORTE"
+          ],
+          "velocidade_relativa_kmh": 49.8,
+          "impacto_alta_energia": true,
+          "veiculos_parados_apos_contato": true,
+          "angulo_trajetorias_graus": 89.9,
+          "pedestres": "desconhecido",
+          "visibilidade": 1.0
+        },
+        "recomendacao": {
+          "regra": "R3",
+          "recurso": "AMBULANCIA_SIMULADA",
+          "justificativa": "Sugerir atendimento por ambulância na simulação. Regra R3: Colisão lateral/traseira com indicador de impacto de alta energia (vel. relativa > 40 km/h). Indicadores: vel. relativa estimada 50 km/h; faixa obstruída: H-OESTE, V-SUL, V-NORTE; veículos envolvidos: 2."
+        },
+        "estado": "SUSPEITA",
+        "evidencia": {
+          "fonte": "seq_07.mp4",
+          "frame": 93,
+          "tempo_video_s": 3.1,
+          "frame_decisao": 113,
+          "imagem": "evidencias/EVT-20261015-195745-KM118-6B5F.jpg",
+          "clip": "evidencias/EVT-20261015-195745-KM118-6B5F.mp4"
+        }
+      }
+    ],
+    "candidatos": [
+      {
+        "frame_contato": 93,
+        "trilhas": [
+          1,
+          3
+        ],
+        "componentes": {
+          "aprox": 1.0,
+          "impacto": 1.0,
+          "persist": 0.909,
+          "clareza": 0.998
+        },
+        "base": 0.981,
+        "visibilidade": 1.0,
+        "confianca": 0.981,
+        "tipo_angulo": "COLISAO_LATERAL",
+        "angulo_graus": 89.9,
+        "metodo": "trajetorias"
+      }
+    ],
+    "saida": "COLISAO_LATERAL"
+  }
+}

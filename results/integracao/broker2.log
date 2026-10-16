@@ -1,0 +1,5 @@
+C:\CP3-MORGS\tools\local_broker.py:15: DeprecationWarning: Loading plugins from EntryPoints is deprecated and will be removed in a future version. Use `plugins` section of config instead.
+  broker = Broker(cfg)
+Configuration parameter 'password-file' not found
+'sys_interval' key is not set or is None
+[broker] ouvindo em 127.0.0.1:18830

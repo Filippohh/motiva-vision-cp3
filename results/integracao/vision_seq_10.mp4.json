@@ -1,0 +1,157 @@
+{
+  "seq_10.mp4": {
+    "video": "seq_10.mp4",
+    "camera_id": "CAM-SP000-KM112-R",
+    "quadros": 270,
+    "fps": 30.0,
+    "tempo_proc_s": 1.94,
+    "eventos": [
+      {
+        "schema": "motiva.evento.v1",
+        "event_id": "EVT-20261015-195441-KM112-6DFB",
+        "versao": 1,
+        "timestamp": "2026-10-15T19:54:41-03:00",
+        "camera_id": "CAM-SP000-KM112-R",
+        "local": {
+          "rodovia": "SP-000 (fictícia)",
+          "km": 112.4,
+          "trecho": "Pista dupla, km 112-113",
+          "municipio": "Cidade Exemplo/SP"
+        },
+        "tipo": "INDETERMINADO",
+        "confianca": {
+          "valor": 0.0,
+          "nivel": "BAIXA",
+          "limiar": 0.6,
+          "componentes": {
+            "aprox": 0,
+            "impacto": 0,
+            "persist": 0,
+            "clareza": 0
+          },
+          "definicao": "0..1 = soma ponderada (aprox 0,25; impacto 0,30; persistência 0,20; clareza do ângulo 0,25) x (0,4 + 0,6 x visibilidade). ALTA >= 0,80; MEDIA >= 0,60; BAIXA < 0,60 -> INDETERMINADO."
+        },
+        "indicadores": {
+          "veiculos_envolvidos": "desconhecido",
+          "faixa_obstruida": "desconhecido",
+          "pedestres": "desconhecido",
+          "visibilidade": 0.0,
+          "motivo_indeterminado": "visibilidade_insuficiente",
+          "medidas_imagem": {
+            "contraste_local_p90": 7.51,
+            "razao_ref": 0.25,
+            "brilho": 172.38
+          }
+        },
+        "recomendacao": {
+          "regra": "R1",
+          "recurso": "REVISAO_OPERADOR",
+          "justificativa": "Solicitar revisão do operador sem concluir o tipo ou a gravidade. Regra R1: Tipo INDETERMINADO ou confiança abaixo do limiar (0,60). Indicadores: faixa obstruída: desconhecido; veículos envolvidos: desconhecido."
+        },
+        "estado": "SUSPEITA",
+        "evidencia": {
+          "fonte": "seq_10.mp4",
+          "frame": 71,
+          "tempo_video_s": 2.37,
+          "frame_decisao": 71,
+          "imagem": "evidencias/EVT-20261015-195441-KM112-6DFB.jpg",
+          "clip": "evidencias/EVT-20261015-195441-KM112-6DFB.mp4"
+        }
+      },
+      {
+        "schema": "motiva.evento.v1",
+        "event_id": "EVT-20261015-195441-KM112-6DFB",
+        "versao": 2,
+        "timestamp": "2026-10-15T19:54:42-03:00",
+        "camera_id": "CAM-SP000-KM112-R",
+        "local": {
+          "rodovia": "SP-000 (fictícia)",
+          "km": 112.4,
+          "trecho": "Pista dupla, km 112-113",
+          "municipio": "Cidade Exemplo/SP"
+        },
+        "tipo": "INDETERMINADO",
+        "confianca": {
+          "valor": 0.349,
+          "nivel": "BAIXA",
+          "limiar": 0.6,
+          "componentes": {
+            "aprox": 1.0,
+            "impacto": 1.0,
+            "persist": 0.364,
+            "clareza": 0.994
+          },
+          "definicao": "0..1 = soma ponderada (aprox 0,25; impacto 0,30; persistência 0,20; clareza do ângulo 0,25) x (0,4 + 0,6 x visibilidade). ALTA >= 0,80; MEDIA >= 0,60; BAIXA < 0,60 -> INDETERMINADO."
+        },
+        "indicadores": {
+          "veiculos_envolvidos": 2,
+          "faixa_obstruida": [
+            "F4-LESTE"
+          ],
+          "velocidade_relativa_kmh": 32.2,
+          "impacto_alta_energia": "desconhecido",
+          "veiculos_parados_apos_contato": false,
+          "angulo_trajetorias_graus": 0.3,
+          "pedestres": "desconhecido",
+          "visibilidade": 0.0,
+          "motivo_indeterminado": "visibilidade_insuficiente"
+        },
+        "recomendacao": {
+          "regra": "R1",
+          "recurso": "REVISAO_OPERADOR",
+          "justificativa": "Solicitar revisão do operador sem concluir o tipo ou a gravidade. Regra R1: Tipo INDETERMINADO ou confiança abaixo do limiar (0,60). Indicadores: vel. relativa estimada 32 km/h; faixa obstruída: F4-LESTE; veículos envolvidos: 2."
+        },
+        "estado": "SUSPEITA",
+        "evidencia": {
+          "fonte": "seq_10.mp4",
+          "frame": 116,
+          "tempo_video_s": 3.87,
+          "frame_decisao": 136,
+          "imagem": "evidencias/EVT-20261015-195441-KM112-6DFB.jpg",
+          "clip": "evidencias/EVT-20261015-195441-KM112-6DFB.mp4"
+        }
+      }
+    ],
+    "candidatos": [
+      {
+        "frame_contato": 116,
+        "trilhas": [
+          2,
+          3
+        ],
+        "componentes": {
+          "aprox": 1.0,
+          "impacto": 1.0,
+          "persist": 0.364,
+          "clareza": 0.994
+        },
+        "base": 0.871,
+        "visibilidade": 0.0,
+        "confianca": 0.349,
+        "tipo_angulo": "COLISAO_TRASEIRA",
+        "angulo_graus": 0.3,
+        "metodo": "trajetorias"
+      },
+      {
+        "frame_contato": 158,
+        "trilhas": [
+          4,
+          5
+        ],
+        "componentes": {
+          "aprox": 0.0,
+          "impacto": 0.066,
+          "persist": 0.0,
+          "clareza": 0.997
+        },
+        "base": 0.269,
+        "visibilidade": 0.0,
+        "confianca": 0.108,
+        "tipo_angulo": "COLISAO_TRASEIRA",
+        "angulo_graus": 0.1,
+        "metodo": "trajetorias"
+      }
+    ],
+    "saida": "INDETERMINADO"
+  }
+}

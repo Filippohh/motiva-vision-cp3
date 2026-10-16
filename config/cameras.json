@@ -1,0 +1,92 @@
+{
+  "CAM-SP000-KM112-R": {
+    "descricao": "Câmera fictícia em pista dupla, vista superior",
+    "local": {
+      "rodovia": "SP-000 (fictícia)",
+      "km": 112.4,
+      "trecho": "Pista dupla, km 112-113",
+      "municipio": "Cidade Exemplo/SP"
+    },
+    "metros_por_pixel": 0.05,
+    "faixas": [
+      {
+        "id": "F1-OESTE",
+        "eixo": "y",
+        "min": 120,
+        "max": 195
+      },
+      {
+        "id": "F2-OESTE",
+        "eixo": "y",
+        "min": 195,
+        "max": 270
+      },
+      {
+        "id": "F3-LESTE",
+        "eixo": "y",
+        "min": 270,
+        "max": 345
+      },
+      {
+        "id": "F4-LESTE",
+        "eixo": "y",
+        "min": 345,
+        "max": 420
+      }
+    ],
+    "contraste_ref": 30.0
+  },
+  "CAM-SP000-KM118-X": {
+    "descricao": "Câmera fictícia em interseção / acesso, vista superior",
+    "local": {
+      "rodovia": "SP-000 (fictícia)",
+      "km": 118.0,
+      "trecho": "Interseção com acesso municipal",
+      "municipio": "Cidade Exemplo/SP"
+    },
+    "metros_por_pixel": 0.05,
+    "faixas": [
+      {
+        "id": "H-OESTE",
+        "eixo": "y",
+        "min": 190,
+        "max": 270,
+        "limite_perp": [
+          0,
+          960
+        ]
+      },
+      {
+        "id": "H-LESTE",
+        "eixo": "y",
+        "min": 270,
+        "max": 350,
+        "limite_perp": [
+          0,
+          960
+        ]
+      },
+      {
+        "id": "V-SUL",
+        "eixo": "x",
+        "min": 400,
+        "max": 480,
+        "limite_perp": [
+          0,
+          540
+        ]
+      },
+      {
+        "id": "V-NORTE",
+        "eixo": "x",
+        "min": 480,
+        "max": 560,
+        "limite_perp": [
+          0,
+          540
+        ]
+      }
+    ],
+    "contraste_ref": 10.5
+  }
+}

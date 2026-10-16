@@ -1,0 +1,60 @@
+19:54:17 [esp32-sim] conectado ao broker
+19:54:18 [esp32-sim] ESTADO FALHA -> NORMAL   (LED: verde fixo)
+19:54:22 [PASSOU] Integração: central conectada, ESP32 online e em NORMAL -> ESP32 estado=NORMAL
+19:54:22 visão: analisando seq_06.mp4
+19:54:24 [esp32-sim] ACK RECEBIDO           SUSPEITA  CMD-24F5A582 EVT-20261015-195424-KM112-E638
+19:54:24 [esp32-sim] ACK APLICADO           SUSPEITA  CMD-24F5A582 EVT-20261015-195424-KM112-E638
+19:54:24 [esp32-sim] ESTADO NORMAL -> SUSPEITA   (LED: amarelo 1 Hz)
+19:54:26 [PASSOU] Três categorias / integração: evento da visão chega à central -> EVT-20261015-195424-KM112-E638 tipo=COLISAO_TRASEIRA
+19:54:26 [PASSOU] Integração completa: comando SUSPEITA aplicado pelo ESP32 (sinal preliminar amarelo) -> cmd=CMD-24F5A582 status=APLICADO
+19:54:26 [esp32-sim] ACK RECEBIDO           CONFIRMAR CMD-87032D5B EVT-20261015-195424-KM112-E638
+19:54:26 [esp32-sim] ACK APLICADO           CONFIRMAR CMD-87032D5B EVT-20261015-195424-KM112-E638
+19:54:26 [PASSOU] Confirmação e rejeição: CONFIRMAR registrado e ESP32 em CONFIRMADO; enviado != aplicado registrado -> CMD-87032D5B enviado=2026-10-15T19:54:26-03:00 recebido=2026-10-15T19:54:26-03:00 aplicado=2026-10-15T19:54:26-03:00
+19:54:26 [esp32-sim] ACK RECEBIDO           CONFIRMAR CMD-87032D5B EVT-20261015-195424-KM112-E638
+19:54:26 [esp32-sim] ACK DUPLICADO          CONFIRMAR CMD-87032D5B EVT-20261015-195424-KM112-E638
+19:54:26 [esp32-sim] ESTADO SUSPEITA -> CONFIRMADO   (LED: vermelho 4 Hz + bipes)
+19:54:28 [PASSOU] Comando duplicado: reenvio do mesmo command_id não repete atuação (ACK DUPLICADO) -> ações=['REENVIO_MANUAL_TESTE_DUPLICATA', 'ESP32_DUPLICATA_DESCARTADA']
+19:54:28 [esp32-sim] ACK RECEBIDO           ENCERRAR  CMD-B33F90B0 EVT-20261015-195424-KM112-E638
+19:54:28 [esp32-sim] ACK APLICADO           ENCERRAR  CMD-B33F90B0 EVT-20261015-195424-KM112-E638
+19:54:28 [PASSOU] Encerramento: ENCERRAR leva ESP32 de volta a NORMAL -> estado central=ENCERRADO
+19:54:28 [esp32-sim] ACK RECEBIDO           SUSPEITA  CMD-REABRIR01 EVT-20261015-195424-KM112-E638
+19:54:28 [esp32-sim] ACK IGNORADO_ENCERRADO SUSPEITA  CMD-REABRIR01 EVT-20261015-195424-KM112-E638
+19:54:28 [esp32-sim] ESTADO CONFIRMADO -> NORMAL   (LED: verde fixo)
+19:54:29 [PASSOU] Comando duplicado: comando para evento encerrado não reabre a ocorrência -> estado ESP32=NORMAL
+19:54:31 [PASSOU] Duplicatas: evento repetido (mesmo event_id/versão) não gera nova ocorrência -> ocorrências com esse id=1
+19:54:31 visão: analisando seq_02.mp4
+19:54:33 [esp32-sim] ACK RECEBIDO           SUSPEITA  CMD-4E8B782A EVT-20261015-195433-KM112-1789
+19:54:33 [esp32-sim] ACK APLICADO           SUSPEITA  CMD-4E8B782A EVT-20261015-195433-KM112-1789
+19:54:33 [esp32-sim] ESTADO NORMAL -> SUSPEITA   (LED: amarelo 1 Hz)
+19:54:35 [esp32-sim] ACK RECEBIDO           REJEITAR  CMD-8E041626 EVT-20261015-195433-KM112-1789
+19:54:35 [esp32-sim] ACK APLICADO           REJEITAR  CMD-8E041626 EVT-20261015-195433-KM112-1789
+19:54:35 [PASSOU] Confirmação e rejeição: REJEITAR registrado e ESP32 volta a NORMAL -> EVT-20261015-195433-KM112-1789 tipo=COLISAO_FRONTAL
+19:54:35 visão: analisando seq_13.mp4
+19:54:35 [esp32-sim] ESTADO SUSPEITA -> NORMAL   (LED: verde fixo)
+19:54:39 [PASSOU] Trânsito sem acidente: vídeo de frenagem/parada não gera ocorrência -> saida=SEM_ACIDENTE
+19:54:39 visão: analisando seq_10.mp4
+19:54:41 [esp32-sim] ACK RECEBIDO           SUSPEITA  CMD-5E2EFD83 EVT-20261015-195441-KM112-6DFB
+19:54:41 [esp32-sim] ACK APLICADO           SUSPEITA  CMD-5E2EFD83 EVT-20261015-195441-KM112-6DFB
+19:54:41 [esp32-sim] ESTADO NORMAL -> SUSPEITA   (LED: amarelo 1 Hz)
+19:54:43 [PASSOU] Ocorrência persistente / visibilidade: neblina -> INDETERMINADO; publicações com um único event_id -> publicações=2 ids=1 regra=R1
+19:54:44 [esp32-sim] ACK RECEBIDO           REJEITAR  CMD-AE0232D1 EVT-20261015-195441-KM112-6DFB
+19:54:44 [esp32-sim] ACK APLICADO           REJEITAR  CMD-AE0232D1 EVT-20261015-195441-KM112-6DFB
+19:54:44 parando o broker MQTT...
+19:54:44 [esp32-sim] desconectado rc=7
+19:54:44 [PASSOU] Broker indisponível: ESP32 indica FALHA ao perder o broker -> estado=FALHA
+19:54:44 [PASSOU] Broker indisponível: central exibe broker desconectado 
+19:54:44 [esp32-sim] ESTADO SUSPEITA -> FALHA   (LED: roxo 2 flashes)
+19:54:47 reiniciando o broker MQTT...
+19:54:49 [esp32-sim] conectado ao broker
+19:54:49 [esp32-sim] ESTADO FALHA -> NORMAL   (LED: verde fixo)
+19:54:49 [PASSOU] Broker indisponível: ESP32 reconecta e volta a NORMAL sem reiniciar -> recuperou em 2.1 s
+19:54:49 [PASSOU] Broker indisponível: central volta a ver o ESP32 online 
+19:54:49 parando a central (dados desatualizados)...
+19:54:59 [PASSOU] Heartbeat / timeout: sem PING da central por >15 s o ESP32 indica FALHA -> após 9.9 s
+19:54:59 [esp32-sim] ESTADO NORMAL -> FALHA   (LED: roxo 2 flashes)
+19:55:00 [esp32-sim] ACK RECEBIDO           REJEITAR  CMD-AE0232D1 EVT-20261015-195441-KM112-6DFB
+19:55:00 [esp32-sim] ACK DUPLICADO          REJEITAR  CMD-AE0232D1 EVT-20261015-195441-KM112-6DFB
+19:55:00 [esp32-sim] ESTADO FALHA -> NORMAL   (LED: verde fixo)
+19:55:00 [PASSOU] Heartbeat / timeout: central de volta -> ESP32 retorna a NORMAL 
+19:55:00 [PASSOU] Histórico: histórico preservado após reiniciar a central (SQLite) -> ocorrências=3
+19:55:01 [esp32-sim] desconectado rc=0

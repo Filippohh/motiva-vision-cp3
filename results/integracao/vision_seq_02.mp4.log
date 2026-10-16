@@ -1,0 +1,5 @@
+== seq_02.mp4 (CAM-SP000-KM112-R)
+  candidato f=107 trilhas=2,3 {'aprox': 1.0, 'impacto': 1.0, 'persist': 1.0, 'clareza': 0.9994357099964867} base=1.00 q=1.00 conf=1.00 -> COLISAO_FRONTAL ang=179.9746069498419
+  >>> EVENTO EVT-20261015-195433-KM112-1789 v1 tipo=COLISAO_FRONTAL conf=1.00 t=3.57s regra=R2
+   saída: COLISAO_FRONTAL  eventos=1  (240 quadros em 1.43 s)
+resultados em C:\CP3-MORGS\results\integracao\vision_seq_02.mp4.json

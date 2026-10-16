@@ -1,0 +1,7 @@
+.env
+__pycache__/
+*.pyc
+results/*.db
+results/*.db-journal
+results/integracao/*.db
+results/central_live.log

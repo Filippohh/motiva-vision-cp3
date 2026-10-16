@@ -1,0 +1,7 @@
+== seq_10.mp4 (CAM-SP000-KM112-R)
+  >>> EVENTO EVT-20261015-195441-KM112-6DFB v1 tipo=INDETERMINADO conf=0.00 t=2.37s regra=R1
+  candidato f=116 trilhas=2,3 {'aprox': 1.0, 'impacto': 1.0, 'persist': 0.36363636363636365, 'clareza': 0.9941790262211774} base=0.87 q=0.00 conf=0.35 -> COLISAO_TRASEIRA ang=0.2619438200470168
+  >>> EVENTO EVT-20261015-195441-KM112-6DFB v2 tipo=INDETERMINADO conf=0.35 t=3.87s regra=R1
+  candidato f=158 trilhas=4,5 {'aprox': 0.0, 'impacto': 0.06600810024569381, 'persist': 0.0, 'clareza': 0.9969528359214077} base=0.27 q=0.00 conf=0.11 -> COLISAO_TRASEIRA ang=0.1371223835366519
+   saída: INDETERMINADO  eventos=2  (270 quadros em 1.94 s)
+resultados em C:\CP3-MORGS\results\integracao\vision_seq_10.mp4.json

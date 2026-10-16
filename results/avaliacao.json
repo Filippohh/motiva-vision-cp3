@@ -1,0 +1,457 @@
+{
+  "resumo": {
+    "videos": 14,
+    "resultados": {
+      "ACERTO": 14
+    },
+    "deteccao": {
+      "VP": 9,
+      "FN": 0,
+      "FP": 0,
+      "VN": 5,
+      "precisao": 1.0,
+      "recall": 1.0
+    },
+    "acuracia_classificacao_acidentes": 1.0,
+    "latencia_media_s": 0.6,
+    "duplicatas": 0
+  },
+  "videos": [
+    {
+      "video": "seq_01",
+      "conjunto": "avaliacao",
+      "cenario": "Colisão traseira sentido oeste",
+      "esperado": "COLISAO_TRASEIRA",
+      "obtido": "COLISAO_TRASEIRA",
+      "resultado": "ACERTO",
+      "event_ids_unicos": 1,
+      "publicacoes": 1,
+      "confianca": 0.872,
+      "regra": "R4",
+      "evidencia": "evidencias/EVT-20261015-194934-KM112-B0A7.jpg (t=4.43 s, quadro 133)",
+      "latencia_s": 0.57,
+      "candidatos": [
+        {
+          "frame_contato": 133,
+          "trilhas": [
+            2,
+            3
+          ],
+          "componentes": {
+            "aprox": 1.0,
+            "impacto": 1.0,
+            "persist": 0.364,
+            "clareza": 0.999
+          },
+          "base": 0.872,
+          "visibilidade": 1.0,
+          "confianca": 0.872,
+          "tipo_angulo": "COLISAO_TRASEIRA",
+          "angulo_graus": 0.0,
+          "metodo": "trajetorias"
+        }
+      ],
+      "tempo_proc_s": 1.79,
+      "quadros": 270
+    },
+    {
+      "video": "seq_02",
+      "conjunto": "ajuste",
+      "cenario": "Colisão frontal com veículo na contramão",
+      "esperado": "COLISAO_FRONTAL",
+      "obtido": "COLISAO_FRONTAL",
+      "resultado": "ACERTO",
+      "event_ids_unicos": 1,
+      "publicacoes": 1,
+      "confianca": 1.0,
+      "regra": "R2",
+      "evidencia": "evidencias/EVT-20261015-194936-KM112-0CD1.jpg (t=3.57 s, quadro 107)",
+      "latencia_s": 0.63,
+      "candidatos": [
+        {
+          "frame_contato": 107,
+          "trilhas": [
+            2,
+            3
+          ],
+          "componentes": {
+            "aprox": 1.0,
+            "impacto": 1.0,
+            "persist": 1.0,
+            "clareza": 0.999
+          },
+          "base": 1.0,
+          "visibilidade": 1.0,
+          "confianca": 1.0,
+          "tipo_angulo": "COLISAO_FRONTAL",
+          "angulo_graus": 180.0,
+          "metodo": "trajetorias"
+        }
+      ],
+      "tempo_proc_s": 1.53,
+      "quadros": 240
+    },
+    {
+      "video": "seq_03",
+      "conjunto": "avaliacao",
+      "cenario": "Colisão frontal (outra faixa/velocidades)",
+      "esperado": "COLISAO_FRONTAL",
+      "obtido": "COLISAO_FRONTAL",
+      "resultado": "ACERTO",
+      "event_ids_unicos": 1,
+      "publicacoes": 1,
+      "confianca": 1.0,
+      "regra": "R2",
+      "evidencia": "evidencias/EVT-20261015-194938-KM112-C97E.jpg (t=3.67 s, quadro 110)",
+      "latencia_s": 0.63,
+      "candidatos": [
+        {
+          "frame_contato": 110,
+          "trilhas": [
+            2,
+            3
+          ],
+          "componentes": {
+            "aprox": 1.0,
+            "impacto": 1.0,
+            "persist": 1.0,
+            "clareza": 0.999
+          },
+          "base": 1.0,
+          "visibilidade": 1.0,
+          "confianca": 1.0,
+          "tipo_angulo": "COLISAO_FRONTAL",
+          "angulo_graus": 180.0,
+          "metodo": "trajetorias"
+        }
+      ],
+      "tempo_proc_s": 1.53,
+      "quadros": 240
+    },
+    {
+      "video": "seq_04",
+      "conjunto": "avaliacao",
+      "cenario": "Colisão lateral vindo do sul",
+      "esperado": "COLISAO_LATERAL",
+      "obtido": "COLISAO_LATERAL",
+      "resultado": "ACERTO",
+      "event_ids_unicos": 1,
+      "publicacoes": 2,
+      "confianca": 0.935,
+      "regra": "R3",
+      "evidencia": "evidencias/EVT-20261015-194939-KM118-DE6D.jpg (t=2.93 s, quadro 88)",
+      "latencia_s": 0.6,
+      "candidatos": [
+        {
+          "frame_contato": 78,
+          "trilhas": [
+            1,
+            3
+          ],
+          "componentes": {
+            "aprox": 1.0,
+            "impacto": 0.0,
+            "persist": 0.0,
+            "clareza": 1.0
+          },
+          "base": 0.5,
+          "visibilidade": 1.0,
+          "confianca": 0.5,
+          "tipo_angulo": "COLISAO_LATERAL",
+          "angulo_graus": 90.0,
+          "metodo": "trajetorias"
+        },
+        {
+          "frame_contato": 88,
+          "trilhas": [
+            2,
+            3
+          ],
+          "componentes": {
+            "aprox": 1.0,
+            "impacto": 1.0,
+            "persist": 0.909,
+            "clareza": 0.811
+          },
+          "base": 0.935,
+          "visibilidade": 1.0,
+          "confianca": 0.935,
+          "tipo_angulo": "COLISAO_LATERAL",
+          "angulo_graus": 81.5,
+          "metodo": "trajetorias"
+        }
+      ],
+      "tempo_proc_s": 2.56,
+      "quadros": 260
+    },
+    {
+      "video": "seq_05",
+      "conjunto": "avaliacao",
+      "cenario": "Tráfego denso com onda de frenagem e variação de luz",
+      "esperado": "SEM_ACIDENTE",
+      "obtido": "SEM_ACIDENTE",
+      "resultado": "ACERTO",
+      "event_ids_unicos": 0,
+      "publicacoes": 0,
+      "confianca": null,
+      "regra": null,
+      "evidencia": "-",
+      "latencia_s": null,
+      "candidatos": [],
+      "tempo_proc_s": 1.8,
+      "quadros": 260
+    },
+    {
+      "video": "seq_06",
+      "conjunto": "ajuste",
+      "cenario": "Colisão traseira em pista livre",
+      "esperado": "COLISAO_TRASEIRA",
+      "obtido": "COLISAO_TRASEIRA",
+      "resultado": "ACERTO",
+      "event_ids_unicos": 1,
+      "publicacoes": 1,
+      "confianca": 0.903,
+      "regra": "R4",
+      "evidencia": "evidencias/EVT-20261015-194944-KM112-0689.jpg (t=4.0 s, quadro 120)",
+      "latencia_s": 0.57,
+      "candidatos": [
+        {
+          "frame_contato": 120,
+          "trilhas": [
+            2,
+            3
+          ],
+          "componentes": {
+            "aprox": 1.0,
+            "impacto": 1.0,
+            "persist": 0.545,
+            "clareza": 0.999
+          },
+          "base": 0.909,
+          "visibilidade": 0.99,
+          "confianca": 0.903,
+          "tipo_angulo": "COLISAO_TRASEIRA",
+          "angulo_graus": 0.1,
+          "metodo": "trajetorias"
+        }
+      ],
+      "tempo_proc_s": 1.69,
+      "quadros": 270
+    },
+    {
+      "video": "seq_07",
+      "conjunto": "ajuste",
+      "cenario": "Colisão lateral (T-bone) na interseção",
+      "esperado": "COLISAO_LATERAL",
+      "obtido": "COLISAO_LATERAL",
+      "resultado": "ACERTO",
+      "event_ids_unicos": 1,
+      "publicacoes": 1,
+      "confianca": 0.981,
+      "regra": "R3",
+      "evidencia": "evidencias/EVT-20261015-194945-KM118-ED3F.jpg (t=3.1 s, quadro 93)",
+      "latencia_s": 0.57,
+      "candidatos": [
+        {
+          "frame_contato": 93,
+          "trilhas": [
+            1,
+            3
+          ],
+          "componentes": {
+            "aprox": 1.0,
+            "impacto": 1.0,
+            "persist": 0.909,
+            "clareza": 0.998
+          },
+          "base": 0.981,
+          "visibilidade": 1.0,
+          "confianca": 0.981,
+          "tipo_angulo": "COLISAO_LATERAL",
+          "angulo_graus": 89.9,
+          "metodo": "trajetorias"
+        }
+      ],
+      "tempo_proc_s": 1.54,
+      "quadros": 260
+    },
+    {
+      "video": "seq_08",
+      "conjunto": "avaliacao",
+      "cenario": "Cruzamento com parada na retenção",
+      "esperado": "SEM_ACIDENTE",
+      "obtido": "SEM_ACIDENTE",
+      "resultado": "ACERTO",
+      "event_ids_unicos": 0,
+      "publicacoes": 0,
+      "confianca": null,
+      "regra": null,
+      "evidencia": "-",
+      "latencia_s": null,
+      "candidatos": [],
+      "tempo_proc_s": 1.59,
+      "quadros": 270
+    },
+    {
+      "video": "seq_09",
+      "conjunto": "ajuste",
+      "cenario": "Passagem normal com ultrapassagens",
+      "esperado": "SEM_ACIDENTE",
+      "obtido": "SEM_ACIDENTE",
+      "resultado": "ACERTO",
+      "event_ids_unicos": 0,
+      "publicacoes": 0,
+      "confianca": null,
+      "regra": null,
+      "evidencia": "-",
+      "latencia_s": null,
+      "candidatos": [],
+      "tempo_proc_s": 1.88,
+      "quadros": 260
+    },
+    {
+      "video": "seq_10",
+      "conjunto": "ajuste",
+      "cenario": "Neblina densa (há impacto traseiro)",
+      "esperado": "INDETERMINADO",
+      "obtido": "INDETERMINADO",
+      "resultado": "ACERTO",
+      "event_ids_unicos": 1,
+      "publicacoes": 2,
+      "confianca": 0.349,
+      "regra": "R1",
+      "evidencia": "evidencias/EVT-20261015-194950-KM112-AA0F.jpg (t=3.87 s, quadro 116)",
+      "latencia_s": 0.63,
+      "candidatos": [
+        {
+          "frame_contato": 116,
+          "trilhas": [
+            2,
+            3
+          ],
+          "componentes": {
+            "aprox": 1.0,
+            "impacto": 1.0,
+            "persist": 0.364,
+            "clareza": 0.994
+          },
+          "base": 0.871,
+          "visibilidade": 0.0,
+          "confianca": 0.349,
+          "tipo_angulo": "COLISAO_TRASEIRA",
+          "angulo_graus": 0.3,
+          "metodo": "trajetorias"
+        },
+        {
+          "frame_contato": 158,
+          "trilhas": [
+            4,
+            5
+          ],
+          "componentes": {
+            "aprox": 0.0,
+            "impacto": 0.066,
+            "persist": 0.0,
+            "clareza": 0.997
+          },
+          "base": 0.269,
+          "visibilidade": 0.0,
+          "confianca": 0.108,
+          "tipo_angulo": "COLISAO_TRASEIRA",
+          "angulo_graus": 0.1,
+          "metodo": "trajetorias"
+        }
+      ],
+      "tempo_proc_s": 2.16,
+      "quadros": 270
+    },
+    {
+      "video": "seq_11",
+      "conjunto": "avaliacao",
+      "cenario": "Noite / baixa luminosidade (há impacto lateral)",
+      "esperado": "INDETERMINADO",
+      "obtido": "INDETERMINADO",
+      "resultado": "ACERTO",
+      "event_ids_unicos": 1,
+      "publicacoes": 1,
+      "confianca": 0.0,
+      "regra": "R1",
+      "evidencia": "evidencias/EVT-20261015-194952-KM118-EE54.jpg (t=2.37 s, quadro 71)",
+      "latencia_s": null,
+      "candidatos": [],
+      "tempo_proc_s": 1.64,
+      "quadros": 260
+    },
+    {
+      "video": "seq_12",
+      "conjunto": "avaliacao",
+      "cenario": "Colisão traseira faixa da esquerda",
+      "esperado": "COLISAO_TRASEIRA",
+      "obtido": "COLISAO_TRASEIRA",
+      "resultado": "ACERTO",
+      "event_ids_unicos": 1,
+      "publicacoes": 1,
+      "confianca": 0.891,
+      "regra": "R4",
+      "evidencia": "evidencias/EVT-20261015-194954-KM112-6552.jpg (t=4.3 s, quadro 129)",
+      "latencia_s": 0.6,
+      "candidatos": [
+        {
+          "frame_contato": 129,
+          "trilhas": [
+            2,
+            3
+          ],
+          "componentes": {
+            "aprox": 1.0,
+            "impacto": 1.0,
+            "persist": 0.455,
+            "clareza": 0.999
+          },
+          "base": 0.891,
+          "visibilidade": 1.0,
+          "confianca": 0.891,
+          "tipo_angulo": "COLISAO_TRASEIRA",
+          "angulo_graus": 0.0,
+          "metodo": "trajetorias"
+        }
+      ],
+      "tempo_proc_s": 1.78,
+      "quadros": 270
+    },
+    {
+      "video": "seq_13",
+      "conjunto": "ajuste",
+      "cenario": "Frenagem forte e parada sem contato",
+      "esperado": "SEM_ACIDENTE",
+      "obtido": "SEM_ACIDENTE",
+      "resultado": "ACERTO",
+      "event_ids_unicos": 0,
+      "publicacoes": 0,
+      "confianca": null,
+      "regra": null,
+      "evidencia": "-",
+      "latencia_s": null,
+      "candidatos": [],
+      "tempo_proc_s": 1.48,
+      "quadros": 270
+    },
+    {
+      "video": "seq_14",
+      "conjunto": "avaliacao",
+      "cenario": "Aproximação de veículo parado sem impacto",
+      "esperado": "SEM_ACIDENTE",
+      "obtido": "SEM_ACIDENTE",
+      "resultado": "ACERTO",
+      "event_ids_unicos": 0,
+      "publicacoes": 0,
+      "confianca": null,
+      "regra": null,
+      "evidencia": "-",
+      "latencia_s": null,
+      "candidatos": [],
+      "tempo_proc_s": 1.52,
+      "quadros": 270
+    }
+  ]
+}

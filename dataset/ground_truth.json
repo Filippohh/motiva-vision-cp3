@@ -1,0 +1,163 @@
+{
+  "seq_01": {
+    "esperado": "COLISAO_TRASEIRA",
+    "cenario": "traseira",
+    "descricao": "Colisão traseira sentido oeste",
+    "efeito": "clear",
+    "contatos_simulados": [
+      {
+        "frame": 136,
+        "x": 549,
+        "y": 232,
+        "vel_relativa_px_quadro": 4.74
+      }
+    ]
+  },
+  "seq_02": {
+    "esperado": "COLISAO_FRONTAL",
+    "cenario": "frontal",
+    "descricao": "Colisão frontal com veículo na contramão",
+    "efeito": "clear",
+    "contatos_simulados": [
+      {
+        "frame": 108,
+        "x": 509,
+        "y": 232,
+        "vel_relativa_px_quadro": 12.72
+      }
+    ]
+  },
+  "seq_03": {
+    "esperado": "COLISAO_FRONTAL",
+    "cenario": "frontal",
+    "descricao": "Colisão frontal (outra faixa/velocidades)",
+    "efeito": "clear",
+    "contatos_simulados": [
+      {
+        "frame": 111,
+        "x": 479,
+        "y": 307,
+        "vel_relativa_px_quadro": 12.25
+      }
+    ]
+  },
+  "seq_04": {
+    "esperado": "COLISAO_LATERAL",
+    "cenario": "lateral",
+    "descricao": "Colisão lateral vindo do sul",
+    "efeito": "clear",
+    "contatos_simulados": [
+      {
+        "frame": 90,
+        "x": 528,
+        "y": 261,
+        "vel_relativa_px_quadro": 10.26
+      }
+    ]
+  },
+  "seq_05": {
+    "esperado": "SEM_ACIDENTE",
+    "cenario": "normal_dense",
+    "descricao": "Tráfego denso com onda de frenagem e variação de luz",
+    "efeito": "flicker",
+    "contatos_simulados": []
+  },
+  "seq_06": {
+    "esperado": "COLISAO_TRASEIRA",
+    "cenario": "traseira",
+    "descricao": "Colisão traseira em pista livre",
+    "efeito": "clear",
+    "contatos_simulados": [
+      {
+        "frame": 123,
+        "x": 278,
+        "y": 307,
+        "vel_relativa_px_quadro": 5.07
+      }
+    ]
+  },
+  "seq_07": {
+    "esperado": "COLISAO_LATERAL",
+    "cenario": "lateral",
+    "descricao": "Colisão lateral (T-bone) na interseção",
+    "efeito": "clear",
+    "contatos_simulados": [
+      {
+        "frame": 96,
+        "x": 469,
+        "y": 214,
+        "vel_relativa_px_quadro": 9.22
+      }
+    ]
+  },
+  "seq_08": {
+    "esperado": "SEM_ACIDENTE",
+    "cenario": "normal_intersection",
+    "descricao": "Cruzamento com parada na retenção",
+    "efeito": "clear",
+    "contatos_simulados": []
+  },
+  "seq_09": {
+    "esperado": "SEM_ACIDENTE",
+    "cenario": "normal_pass",
+    "descricao": "Passagem normal com ultrapassagens",
+    "efeito": "clear",
+    "contatos_simulados": []
+  },
+  "seq_10": {
+    "esperado": "INDETERMINADO",
+    "cenario": "amb_fog",
+    "descricao": "Neblina densa (há impacto traseiro)",
+    "efeito": "fog",
+    "contatos_simulados": [
+      {
+        "frame": 117,
+        "x": 253,
+        "y": 382,
+        "vel_relativa_px_quadro": 6.11
+      }
+    ]
+  },
+  "seq_11": {
+    "esperado": "INDETERMINADO",
+    "cenario": "amb_night",
+    "descricao": "Noite / baixa luminosidade (há impacto lateral)",
+    "efeito": "night",
+    "contatos_simulados": [
+      {
+        "frame": 96,
+        "x": 469,
+        "y": 214,
+        "vel_relativa_px_quadro": 9.22
+      }
+    ]
+  },
+  "seq_12": {
+    "esperado": "COLISAO_TRASEIRA",
+    "cenario": "traseira",
+    "descricao": "Colisão traseira faixa da esquerda",
+    "efeito": "clear",
+    "contatos_simulados": [
+      {
+        "frame": 131,
+        "x": 570,
+        "y": 157,
+        "vel_relativa_px_quadro": 5.31
+      }
+    ]
+  },
+  "seq_13": {
+    "esperado": "SEM_ACIDENTE",
+    "cenario": "normal_brake",
+    "descricao": "Frenagem forte e parada sem contato",
+    "efeito": "clear",
+    "contatos_simulados": []
+  },
+  "seq_14": {
+    "esperado": "SEM_ACIDENTE",
+    "cenario": "normal_approach",
+    "descricao": "Aproximação de veículo parado sem impacto",
+    "efeito": "clear",
+    "contatos_simulados": []
+  }
+}

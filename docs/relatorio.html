@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Motiva Vision: Relatório CP3</title>
+<style>
+  @page { size: A4; margin: 16mm 15mm 16mm 15mm; }
+  body { font: 10.5pt/1.45 "Segoe UI", Arial, sans-serif; color:#1d2330; margin:0; }
+  h1 { font-size: 22pt; margin: 0 0 4px; color:#c2185b; }
+  h2 { font-size: 14pt; color:#c2185b; border-bottom: 2px solid #c2185b; padding-bottom: 2px; margin: 20px 0 8px; page-break-after: avoid; }
+  h3 { font-size: 11.5pt; margin: 14px 0 6px; page-break-after: avoid; }
+  p { margin: 5px 0; text-align: justify; }
+  table { border-collapse: collapse; width: 100%; margin: 6px 0 10px; font-size: 9pt; page-break-inside: auto; }
+  tr { page-break-inside: avoid; }
+  th { background: #c2185b; color: #fff; text-align: left; padding: 4px 6px; }
+  td { border: 1px solid #ddd; padding: 3px 6px; vertical-align: top; }
+  tr:nth-child(even) td { background: #fdf2f7; }
+  code, pre { font-family: Consolas, monospace; font-size: 8.5pt; }
+  pre { background: #f5f6f8; border: 1px solid #ddd; padding: 8px; white-space: pre-wrap; page-break-inside: avoid; }
+  .cover { border-left: 6px solid #c2185b; padding: 6px 0 6px 14px; margin-bottom: 14px; }
+  .muted { color: #667085; }
+  .todo { background: #fff3cd; border: 1px dashed #d4a017; padding: 1px 4px; }
+  .box { background:#f5f6f8; border:1px solid #ddd; border-radius:4px; padding:8px 10px; margin:8px 0; page-break-inside: avoid; }
+  .warn { background:#fff8e6; border-color:#f1d58d; }
+  .imgs { display: flex; gap: 8px; flex-wrap: wrap; page-break-inside: avoid; }
+  .imgs figure { margin: 0; flex: 1 1 48%; }
+  .imgs img { width: 100%; border: 1px solid #ccc; }
+  figcaption { font-size: 8.5pt; color: #667085; text-align: center; }
+  .full img { width: 100%; border: 1px solid #ccc; }
+  .ok { color: #12805c; font-weight: 600; }
+  .pb { page-break-before: always; }
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <h1>Motiva Vision</h1>
+  <div style="font-size:12.5pt">Detecção e resposta simulada a acidentes rodoviários: CP3</div>
+  <div class="muted">FIAP · Prof. Marcelo Fernando Morgantini · Outubro/2026</div>
+</div>
+
+<table>
+  <tr><th style="width:30%">Integrante</th><th style="width:20%">RM</th><th>Turma</th></tr>
+  <tr><td><span class="todo">NOME DO INTEGRANTE 1</span></td><td><span class="todo">RM00000</span></td><td rowspan="5"><span class="todo">TURMA</span></td></tr>
+  <tr><td><span class="todo">NOME DO INTEGRANTE 2</span></td><td><span class="todo">RM00000</span></td></tr>
+  <tr><td><span class="todo">NOME DO INTEGRANTE 3</span></td><td><span class="todo">RM00000</span></td></tr>
+  <tr><td><span class="todo">NOME DO INTEGRANTE 4</span></td><td><span class="todo">RM00000</span></td></tr>
+  <tr><td><span class="todo">NOME DO INTEGRANTE 5</span></td><td><span class="todo">RM00000</span></td></tr>
+</table>
+
+<h3>Links para validação</h3>
+<table>
+  <tr><td style="width:30%">Repositório (código completo)</td><td><span class="todo">https://github.com/USUARIO/motiva-vision</span></td></tr>
+  <tr><td>Projeto Wokwi (ESP32)</td><td><span class="todo">https://wokwi.com/projects/XXXXXXXX</span></td></tr>
+  <tr><td>Vídeo de demonstração (opcional)</td><td><span class="todo">https://youtu.be/XXXXXXX</span></td></tr>
+  <tr><td>Evidências no repositório</td><td><code>results/avaliacao.json</code>, <code>results/evidencias_avaliacao/</code>, <code>results/integracao/</code> (logs MQTT, export CSV/JSON da central, resultado dos testes)</td></tr>
+</table>
+
+<h2>1. Visão geral e arquitetura</h2>
+<p>O protótipo implementa a cadeia completa pedida na proposta. Um vídeo de uma câmera fictícia é analisado localmente em Python/OpenCV. Quando surge um possível acidente, a visão publica um evento JSON estruturado no MQTT. A central operacional (Flask + SQLite) mostra o evento com evidência, confiança e recomendação simulada. O operador decide CONFIRMAR, REJEITAR ou ENCERRAR. O ESP32 sinaliza a via com LED RGB, buzzer e LCD e devolve à central a confirmação de recebimento e de aplicação de cada comando.</p>
+
+<svg viewBox="0 0 760 175" width="100%" style="margin:6px 0" font-family="Segoe UI, Arial" font-size="11">
+  <defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#555"/></marker></defs>
+  <g stroke="#c2185b" stroke-width="1.5" fill="#fdf2f7">
+    <rect x="5" y="40" width="120" height="70" rx="6"/><rect x="165" y="40" width="150" height="70" rx="6"/>
+    <rect x="355" y="40" width="110" height="70" rx="6"/><rect x="505" y="40" width="120" height="70" rx="6"/>
+    <rect x="655" y="40" width="100" height="70" rx="6"/>
+  </g>
+  <g text-anchor="middle" fill="#1d2330">
+    <text x="65" y="62" font-weight="700">Aquisição</text><text x="65" y="78">vídeo .mp4 / câmera</text><text x="65" y="93">camera_id + trecho</text>
+    <text x="240" y="62" font-weight="700">Visão (Python/OpenCV)</text><text x="240" y="78">MOG2 + rastreamento</text><text x="240" y="93">análise temporal + confiança</text>
+    <text x="410" y="62" font-weight="700">Broker MQTT</text><text x="410" y="78">HiveMQ público</text><text x="410" y="93">ou local (amqtt)</text>
+    <text x="565" y="62" font-weight="700">Central</text><text x="565" y="78">Flask + SQLite</text><text x="565" y="93">painel + decisão humana</text>
+    <text x="705" y="62" font-weight="700">ESP32</text><text x="705" y="78">Wokwi</text><text x="705" y="93">LED RGB, buzzer, LCD</text>
+  </g>
+  <g stroke="#555" stroke-width="1.3" marker-end="url(#a)" fill="none">
+    <line x1="125" y1="75" x2="163" y2="75"/><line x1="315" y1="75" x2="353" y2="75"/><line x1="465" y1="65" x2="503" y2="65"/>
+    <line x1="503" y1="88" x2="467" y2="88"/><path d="M410 110 V150 H705 V112"/><path d="M690 112 V140 H425 V112"/>
+  </g>
+  <g fill="#555" font-size="9.5">
+    <text x="320" y="70">eventos</text><text x="468" y="60">eventos</text><text x="468" y="100">comandos</text>
+    <text x="520" y="163">comandos (QoS 1) → ESP32</text><text x="440" y="135">status: ACK / HEARTBEAT / LWT ← ESP32</text>
+  </g>
+</svg>
+
+<table>
+  <tr><th style="width:18%">Camada</th><th>Implementação</th><th style="width:28%">Arquivos</th></tr>
+  <tr><td>Aquisição</td><td>Arquivo de vídeo (ou webcam via OpenCV) associado a um <code>camera_id</code> com rodovia, km e trecho fictícios, faixas e escala (m/pixel).</td><td><code>config/cameras.json</code>, <code>dataset/manifest.json</code></td></tr>
+  <tr><td>Visão computacional</td><td>Subtração de fundo, rastreamento multiobjeto, análise temporal do par de veículos em contato, classificação por geometria das trajetórias, índice de visibilidade, confiança e limiar, controle de ocorrência (event_id único).</td><td><code>vision/pipeline.py</code>, <code>vision/run_vision.py</code></td></tr>
+  <tr><td>Comunicação</td><td>MQTT (paho-mqtt / PubSubClient), JSON <code>motiva.evento.v1</code>, tópicos próprios por RM.</td><td><code>config/settings.py</code>, <code>common/mqtt.py</code></td></tr>
+  <tr><td>Central</td><td>Painel web, histórico em SQLite, matriz de recomendação, CONFIRMAR/REJEITAR/ENCERRAR, rastreio de comando enviado/recebido/aplicado, retransmissão, exportação CSV/JSON.</td><td><code>central/app.py</code>, <code>central/templates/index.html</code>, <code>common/recommendation.py</code></td></tr>
+  <tr><td>Infraestrutura</td><td>ESP32 com 4 estados obrigatórios, ACKs, heartbeat, LWT, proteção contra duplicatas e reconexão não bloqueante com <code>millis()</code>.</td><td><code>esp32/sketch.ino</code>, <code>esp32/diagram.json</code></td></tr>
+</table>
+
+<h2>2. Circuito (ESP32 no Wokwi)</h2>
+<table>
+  <tr><th>Componente</th><th>Ligação no ESP32 DevKit-C v4</th><th>Função</th></tr>
+  <tr><td>LED RGB (catodo comum) + 3 resistores de 220 Ω</td><td>R → GPIO25, G → GPIO26, B → GPIO27, COM → GND</td><td>Cor e ritmo do estado</td></tr>
+  <tr><td>Buzzer</td><td>GPIO14 / GND</td><td>Bipes duplos no estado CONFIRMADO</td></tr>
+  <tr><td>LCD 16x2 I2C (0x27)</td><td>SDA → GPIO21, SCL → GPIO22, VCC → 5 V, GND</td><td>Estado da via, ocorrências ativas, último comando ou motivo da falha</td></tr>
+</table>
+<table>
+  <tr><th>Estado</th><th>Sinalização</th><th>Quando</th></tr>
+  <tr><td><b style="color:#12805c">NORMAL</b></td><td>verde fixo; LCD "monitorando"</td><td>conectado, central viva e nenhuma ocorrência ativa</td></tr>
+  <tr><td><b style="color:#b7791f">SUSPEITA</b></td><td>amarelo piscando a 1 Hz, sem som (sinal preliminar)</td><td>comando SUSPEITA recebido; aguardando avaliação humana</td></tr>
+  <tr><td><b style="color:#c0262d">CONFIRMADO</b></td><td>vermelho piscando a 4 Hz + 2 bipes a cada 2 s</td><td>operador confirmou</td></tr>
+  <tr><td><b style="color:#6b3fa0">FALHA</b></td><td>roxo com 2 flashes a cada 1,5 s; LCD mostra o motivo</td><td>sem broker, ou sem nenhuma mensagem da central (PING a cada 5 s) há mais de 15 s</td></tr>
+</table>
+<p>A sinalização preliminar (amarelo, sem som) é claramente diferente da confirmada (vermelho rápido com buzzer). O <code>loop()</code> não bloqueia: os padrões de LED e buzzer são calculados com <code>millis()</code>, a reconexão Wi-Fi/MQTT é tentada a cada 3 s com <code>setSocketTimeout(2)</code> e o LCD só é reescrito quando muda. O estado FALHA tem prioridade de exibição, mas as ocorrências continuam guardadas. Quando a comunicação volta, o ESP32 retorna ao estado real (por exemplo, CONFIRMADO).</p>
+<p><b>Encerramento:</b> REJEITAR ou ENCERRAR removem a ocorrência da lista ativa e gravam o event_id num anel de "fechados". Sem outras ocorrências ativas, o ESP32 volta a NORMAL. <b>Duplicatas:</b> o firmware guarda os últimos 32 <code>command_id</code> aplicados. Um comando repetido recebe ACK <code>DUPLICADO</code> e não atua de novo. SUSPEITA ou CONFIRMAR para um evento fechado recebe <code>IGNORADO_ENCERRADO</code> e não reabre o evento.</p>
+
+<h2>3. Categorias implementadas e limites de reconhecimento</h2>
+<table>
+  <tr><th>Saída</th><th>Critério observável (vista superior, câmera fixa)</th></tr>
+  <tr><td>COLISAO_TRASEIRA</td><td>Contato entre dois veículos cujas trajetórias antes do impacto têm ângulo próximo de 0° (mesmo sentido), seguido de parada brusca. Também vale para veículo móvel atingindo um veículo parado alinhado ao seu eixo.</td></tr>
+  <tr><td>COLISAO_FRONTAL</td><td>Contato com trajetórias opostas (ângulo próximo de 180°) e parada brusca.</td></tr>
+  <tr><td>COLISAO_LATERAL</td><td>Contato com trajetórias aproximadamente perpendiculares (próximo de 90°), ou veículo móvel atingindo perpendicularmente o eixo de um veículo parado.</td></tr>
+  <tr><td>SEM_ACIDENTE</td><td>Nenhum candidato com evidência mínima. Publicado periodicamente em <code>motiva/&lt;RM&gt;/visao</code> como estado de monitoramento da câmera.</td></tr>
+  <tr><td>INDETERMINADO</td><td>Evidência acima do mínimo, mas confiança abaixo do limiar, ângulo ambíguo ou visibilidade insuficiente. Também é emitido quando a visibilidade fica ruim por 2 s seguidos: a câmera "não consegue ver" e pede revisão humana.</td></tr>
+</table>
+<p><b>Limites:</b> capotamento e atropelamento não foram implementados. A câmera precisa ser fixa e a escala (m/px) e as faixas são configuradas por câmera. Com o veículo atingido parado, o sistema não sabe qual extremidade é a traseira; uma frontal contra veículo parado é classificada como traseira, com clareza reduzida em 20%. Colisões em ângulo intermediário (≈45° ou ≈135°) têm clareza baixa e tendem a INDETERMINADO. Envolvimento de 3 ou mais veículos é agregado na mesma ocorrência, mas a contagem continua sendo do par inicial. Nenhuma lesão ou gravidade é inferida.</p>
+
+<h2>4. Algoritmo de visão computacional</h2>
+<ol>
+  <li><b>Detecção:</b> subtração de fundo <i>MOG2</i> (history 500, varThreshold 28). O modelo aprende o fundo nos primeiros 12 quadros e depois usa taxa de aprendizado 0,0008, para que veículos parados após o impacto continuem visíveis. Em seguida vêm abertura e fechamento morfológicos e contornos com área ≥ 400 px.</li>
+  <li><b>Rastreamento temporal:</b> cada trilha prevê a próxima posição pela velocidade média dos últimos 4 quadros. Um blob que contém a previsão é associado à trilha. Quando dois veículos se fundem num único blob (contato), as duas trilhas passam a seguir o deslocamento do blob compartilhado, preservando a identidade de cada uma.</li>
+  <li><b>Contato:</b> duas trilhas no mesmo blob ou com caixas sobrepostas. Isso apenas <i>dispara</i> a análise: <b>a sobreposição sozinha não gera evento</b>.</li>
+  <li><b>Análise temporal (20 quadros após o contato, cerca de 0,67 s):</b> calcula quatro componentes entre 0 e 1:
+    <ul>
+      <li><code>aprox</code>: velocidade de fechamento entre os veículos nos 6 quadros anteriores ao contato (4 px/quadro = 1);</li>
+      <li><code>impacto</code>: queda absoluta de velocidade entre os 6 quadros antes e os quadros +10 a +20 após o contato (4 px/quadro = 1). Uma frenagem normal reduz a velocidade <i>antes</i> de os veículos se aproximarem, então esse termo fica baixo;</li>
+      <li><code>persist</code>: fração dos quadros +10 a +20 com os dois veículos praticamente parados (&lt; 1 px/quadro);</li>
+      <li><code>clareza</code>: quão perto o ângulo entre as velocidades pré-impacto está do protótipo da categoria (0°, 90° ou 180°); vale 0 a 45° do protótipo.</li>
+    </ul></li>
+  <li><b>Indicadores:</b> número de veículos, faixas obstruídas (sobreposição da caixa final com as faixas da câmera), velocidade relativa estimada em km/h (px/quadro × fps × m/px × 3,6), alta energia (&gt; 40 km/h), ângulo das trajetórias, visibilidade e pedestres ("desconhecido": não há detector de pessoas).</li>
+  <li><b>Controle de ocorrência:</b> candidatos que compartilham uma trilha ou ficam a menos de 140 px de uma ocorrência ativa são agregados a ela, sem novo event_id. Se a nova evidência for mais forte (por exemplo, INDETERMINADO → categoria, ou confiança +0,10), o evento é republicado com o <b>mesmo event_id</b> e <code>versao</code> incrementada.</li>
+  <li><b>Evidência:</b> JPG anotado do quadro do contato (trajetórias, caixa, tipo, confiança, instante) e clipe MP4 com os quadros entre o contato −25 e a decisão. O MQTT leva apenas a referência ao arquivo, sem transmitir imagens pelo broker público.</li>
+</ol>
+
+<h2>5. Escore de confiança e limiar</h2>
+<div class="box">
+  <b>base</b> = 0,25·aprox + 0,30·impacto + 0,20·persist + 0,25·clareza<br>
+  <b>confiança</b> = base × (0,4 + 0,6·q<sub>visib</sub>)<br>
+  q<sub>visib</sub> ∈ [0,1] = min(contraste local relativo à referência da câmera, brilho), onde o contraste local é o percentil 90 do desvio-padrão em blocos 16×16.
+</div>
+<table>
+  <tr><th>Condição</th><th>Saída</th></tr>
+  <tr><td>base &lt; 0,35</td><td>candidato descartado (SEM_ACIDENTE), mas registrado no log de candidatos</td></tr>
+  <tr><td>q<sub>visib</sub> &lt; 0,45, <i>ou</i> confiança &lt; <b>0,60</b>, <i>ou</i> ângulo indefinido</td><td><b>INDETERMINADO</b>, regra R1 (revisão humana sem concluir tipo ou gravidade)</td></tr>
+  <tr><td>confiança ≥ 0,60</td><td>categoria; nível MÉDIA (0,60 a 0,80) ou ALTA (≥ 0,80)</td></tr>
+  <tr><td>q<sub>visib</sub> &lt; 0,45 por 60 quadros</td><td>alerta INDETERMINADO de visibilidade (motivo <code>visibilidade_insuficiente</code>)</td></tr>
+</table>
+<p>Os pesos, os limiares e as referências de contraste (30 para a pista dupla e 10,5 para a interseção, que tem menos bordas) foram ajustados <b>somente</b> com os 6 vídeos do conjunto de ajuste. A confiança é um escore heurístico de evidência, não uma probabilidade calibrada.</p>
+
+<h2>6. Matriz de recomendação operacional (simulada)</h2>
+<p>Avaliada em ordem; vale a primeira regra que casar. Ela combina o tipo de acidente com indicadores visíveis (veículos envolvidos, velocidade relativa e faixa obstruída). <i>Regras fictícias, sem caráter de protocolo médico.</i></p>
+<table>
+  <tr><th>Regra</th><th>Condição simulada</th><th>Recurso sugerido</th></tr>
+  <tr><td>R1</td><td>INDETERMINADO ou confiança &lt; 0,60</td><td>REVISAO_OPERADOR: revisão sem concluir tipo ou gravidade</td></tr>
+  <tr><td>R2</td><td>Colisão frontal, ou 3+ veículos envolvidos</td><td>AVALIACAO_PRIORITARIA_RESGATE: avaliação prioritária + recurso adicional de resgate</td></tr>
+  <tr><td>R3</td><td>Lateral ou traseira com alta energia (velocidade relativa &gt; 40 km/h)</td><td>AMBULANCIA_SIMULADA</td></tr>
+  <tr><td>R4</td><td>Lateral ou traseira sem alta energia, com faixa obstruída</td><td>EQUIPE_OPERACIONAL_E_SINALIZACAO (equipe + sinalização/guincho)</td></tr>
+  <tr><td>R5</td><td>Evento confirmado sem sinais adicionais</td><td>EQUIPE_OPERACIONAL</td></tr>
+</table>
+<p>A justificativa enviada no evento e exibida na central cita a regra aplicada e os valores dos indicadores, por exemplo: <i>"Regra R3: … Indicadores: vel. relativa estimada 50 km/h; faixa obstruída: H-OESTE…; veículos envolvidos: 2."</i></p>
+
+<h2>7. Protocolo MQTT e registro de eventos</h2>
+<table>
+  <tr><th>Tópico</th><th>Sentido</th><th>QoS</th><th>Retida</th><th>Mensagens</th></tr>
+  <tr><td><code>motiva/&lt;RM&gt;/eventos</code></td><td>visão → central</td><td>1</td><td>não</td><td>evento <code>motiva.evento.v1</code> (abaixo)</td></tr>
+  <tr><td><code>motiva/&lt;RM&gt;/visao</code></td><td>visão → central</td><td>0</td><td>não</td><td>a cada 2 s de vídeo: <code>{camera_id, fonte, tempo_video_s, visibilidade, saida: SEM_ACIDENTE|OCORRENCIA_ATIVA}</code></td></tr>
+  <tr><td><code>motiva/&lt;RM&gt;/comandos</code></td><td>central → ESP32</td><td>1</td><td>não</td><td><code>{command_id, event_id, acao: SUSPEITA|CONFIRMAR|REJEITAR|ENCERRAR, timestamp, tentativa}</code> e <code>{acao: PING}</code> a cada 5 s</td></tr>
+  <tr><td><code>motiva/&lt;RM&gt;/status</code></td><td>ESP32 → central</td><td>0</td><td>ONLINE e LWT: sim</td><td><code>ACK {command_id, event_id, acao, fase: RECEBIDO|APLICADO|DUPLICADO|IGNORADO_ENCERRADO, estado}</code>, <code>HEARTBEAT {estado, ativas, uptime_s, rssi}</code> a cada 5 s, <code>ONLINE</code> e LWT <code>{tipo: LWT, online: false}</code></td></tr>
+</table>
+<p><b>QoS e retenção:</b> eventos e comandos usam QoS 1 (pelo menos uma entrega). Duplicatas são esperadas e tratadas por id. Eventos e comandos <b>não são retidos</b>, para que um cliente reconectado não receba de novo uma ocorrência antiga. Só a presença do ESP32 (ONLINE/LWT) é retida. O PubSubClient publica apenas em QoS 0, então a confiabilidade ESP32 → central vem do ACK de aplicação: a central retransmite o mesmo <code>command_id</code> a cada 6 s, até 3 vezes, e depois marca SEM_CONFIRMACAO.</p>
+<p><b>Duplicatas:</b> (1) a visão emite um event_id por ocorrência e republica apenas como nova <code>versao</code>; (2) a central faz upsert por <code>event_id</code> e ignora versões menores ou iguais à armazenada (registra DUPLICATA_IGNORADA); (3) o ESP32 ignora <code>command_id</code> repetido e não reabre eventos encerrados.</p>
+<p><b>Unidades e formatos:</b> <code>timestamp</code> em ISO-8601 com fuso −03:00 (America/Sao_Paulo); confiança de 0 a 1 (3 casas); velocidade em km/h (estimada pela escala da câmera); <code>tempo_video_s</code> em segundos; <code>frame</code> = índice do quadro do contato; ângulo em graus de 0 a 180; visibilidade de 0 a 1; campos sem observação possível valem <code>"desconhecido"</code>. <b>Credenciais:</b> lidas de <code>.env</code> (fora do Git, ver <code>.env.example</code>). O broker público usa só identificadores de teste e dados fictícios, sem imagens.</p>
+<h3>Exemplo real de evento (seq_07, colisão lateral)</h3>
+<pre>{
+ "schema": "motiva.evento.v1", "event_id": "EVT-20261015-195745-KM118-6B5F", "versao": 1,
+ "timestamp": "2026-10-15T19:57:45-03:00",
+ "camera_id": "CAM-SP000-KM118-X",
+ "local": {"rodovia": "SP-000 (fictícia)", "km": 118.0, "trecho": "Interseção com acesso municipal", "municipio": "Cidade Exemplo/SP"},
+ "tipo": "COLISAO_LATERAL",
+ "confianca": {"valor": 0.981, "nivel": "ALTA", "limiar": 0.6,
+               "componentes": {"aprox": 1.0, "impacto": 1.0, "persist": 0.909, "clareza": 0.998}, "definicao": "..."},
+ "indicadores": {"veiculos_envolvidos": 2, "faixa_obstruida": ["H-OESTE", "V-SUL", "V-NORTE"],
+                 "velocidade_relativa_kmh": 49.8, "impacto_alta_energia": true, "veiculos_parados_apos_contato": true,
+                 "angulo_trajetorias_graus": 89.9, "pedestres": "desconhecido", "visibilidade": 1.0},
+ "recomendacao": {"regra": "R3", "recurso": "AMBULANCIA_SIMULADA", "justificativa": "Sugerir atendimento por ambulância na simulação. Regra R3: ..."},
+ "estado": "SUSPEITA",
+ "evidencia": {"fonte": "seq_07.mp4", "frame": 93, "tempo_video_s": 3.1, "frame_decisao": 113,
+               "imagem": "evidencias/EVT-20261015-195745-KM118-6B5F.jpg", "clip": "evidencias/EVT-20261015-195745-KM118-6B5F.mp4"}
+}</pre>
+
+<h2>8. Central operacional e histórico</h2>
+<p>Painel web (<code>http://localhost:5000</code>) atualizado a cada 1 s. Mostra: estado da conexão com o broker, ESP32 online/sem contato, estado atual do ESP32 e último contato; câmeras em monitoramento; lista de ocorrências; e, para a ocorrência selecionada, tipo, confiança e componentes, localização, evidência (imagem e clipe), recomendação com justificativa, indicadores, botões CONFIRMAR/REJEITAR/ENCERRAR com o nome do operador, a tabela de comandos com <b>enviado ≠ recebido ≠ aplicado</b> e o histórico de ações com horário e autor. Fluxo: SUSPEITA → CONFIRMADO → ENCERRADO, ou SUSPEITA → REJEITADO; ações fora do fluxo são recusadas (HTTP 409). O histórico fica no SQLite (<code>results/central.db</code>) e sobrevive a atualizar a página ou reiniciar a central. A exportação está em <code>/api/export.csv</code> e <code>/api/export.json</code> (ocorrências, ações, comandos e mensagens MQTT).</p>
+<div class="full"><img src="img/central_confirmado.png" alt="painel"></div>
+<p class="muted" style="text-align:center;font-size:8.5pt">Painel durante demonstração: colisão lateral (seq_07) confirmada pelo operador; SUSPEITA e CONFIRMAR aplicados pelo ESP32 (gêmeo), com horários de envio, recebimento e aplicação.</p>
+
+<h2 class="pb">9. Testes</h2>
+<h3>9.1 Sequências de teste e separação</h3>
+<p>Foram usadas <b>14 sequências</b> (a proposta pede 12): 7 com acidente (3 traseiras, 2 frontais, 2 laterais), 5 sem acidente (passagem normal com ultrapassagens, frenagem forte com parada, aproximação de veículo parado sem impacto, cruzamento com parada na retenção, tráfego denso com onda de frenagem e variação de luz) e 2 com visibilidade prejudicada (neblina densa e noite, ambas <i>com</i> impacto real). As cenas são <b>simulações visuais coerentes</b> (permitidas pela proposta) geradas por <code>vision/generate_dataset.py</code>. Cada vídeo vem de uma pequena simulação física 2D: a colisão não é desenhada como rótulo, ela acontece quando os retângulos dos veículos se tocam e é resolvida como choque inelástico com atrito e giro. Os nomes dos arquivos são neutros e embaralhados (<code>seq_01</code> a <code>seq_14</code>). Os rótulos ficam em <code>ground_truth.json</code>, lido apenas pelo avaliador. O detector recebe só os pixels.</p>
+<p><b>Separação:</b> 6 vídeos de <b>ajuste</b> (seq_02, 06, 07, 09, 10, 13) foram os únicos usados para definir pesos, limiares e referências de contraste. Os outros <b>8 de avaliação</b> (seq_01, 03, 04, 05, 08, 11, 12, 14, mais da metade) só foram processados depois de os parâmetros serem congelados.</p>
+
+<h3>9.2 Resultados por vídeo (avaliação final, <code>python -m vision.evaluate</code>)</h3>
+<table>
+  <tr><th>Vídeo</th><th>Conj.</th><th>Cenário</th><th>Esperado</th><th>Obtido</th><th>Conf.</th><th>Regra</th><th>IDs</th><th>Evidência (instante)</th><th>Resultado</th></tr>
+  <tr><td>seq_01</td><td>aval.</td><td>Traseira, sentido oeste</td><td>TRASEIRA</td><td>TRASEIRA</td><td>0,872</td><td>R4</td><td>1</td><td>t=4,43 s, q.133</td><td class="ok">acerto</td></tr>
+  <tr><td>seq_02</td><td>ajuste</td><td>Frontal com veículo na contramão</td><td>FRONTAL</td><td>FRONTAL</td><td>1,000</td><td>R2</td><td>1</td><td>t=3,57 s, q.107</td><td class="ok">acerto</td></tr>
+  <tr><td>seq_03</td><td>aval.</td><td>Frontal (outra faixa/velocidades)</td><td>FRONTAL</td><td>FRONTAL</td><td>1,000</td><td>R2</td><td>1</td><td>t=3,67 s, q.110</td><td class="ok">acerto</td></tr>
+  <tr><td>seq_04</td><td>aval.</td><td>Lateral vindo do sul</td><td>LATERAL</td><td>LATERAL*</td><td>0,935</td><td>R3</td><td>1</td><td>t=2,93 s, q.88</td><td class="ok">acerto*</td></tr>
+  <tr><td>seq_05</td><td>aval.</td><td>Tráfego denso + variação de luz</td><td>SEM ACID.</td><td>SEM ACID.</td><td>-</td><td>-</td><td>0</td><td>-</td><td class="ok">acerto</td></tr>
+  <tr><td>seq_06</td><td>ajuste</td><td>Traseira em pista livre</td><td>TRASEIRA</td><td>TRASEIRA</td><td>0,903</td><td>R4</td><td>1</td><td>t=4,00 s, q.120</td><td class="ok">acerto</td></tr>
+  <tr><td>seq_07</td><td>ajuste</td><td>Lateral (T-bone) na interseção</td><td>LATERAL</td><td>LATERAL</td><td>0,981</td><td>R3</td><td>1</td><td>t=3,10 s, q.93</td><td class="ok">acerto</td></tr>
+  <tr><td>seq_08</td><td>aval.</td><td>Cruzamento com parada na retenção</td><td>SEM ACID.</td><td>SEM ACID.</td><td>-</td><td>-</td><td>0</td><td>-</td><td class="ok">acerto</td></tr>
+  <tr><td>seq_09</td><td>ajuste</td><td>Passagem normal com ultrapassagens</td><td>SEM ACID.</td><td>SEM ACID.</td><td>-</td><td>-</td><td>0</td><td>-</td><td class="ok">acerto</td></tr>
+  <tr><td>seq_10</td><td>ajuste</td><td>Neblina densa (há impacto traseiro)</td><td>INDETERM.</td><td>INDETERM.</td><td>0,349</td><td>R1</td><td>1</td><td>t=3,87 s, q.116</td><td class="ok">acerto</td></tr>
+  <tr><td>seq_11</td><td>aval.</td><td>Noite (há impacto lateral)</td><td>INDETERM.</td><td>INDETERM.**</td><td>0,000</td><td>R1</td><td>1</td><td>t=2,37 s, q.71</td><td class="ok">acerto**</td></tr>
+  <tr><td>seq_12</td><td>aval.</td><td>Traseira, faixa da esquerda</td><td>TRASEIRA</td><td>TRASEIRA</td><td>0,891</td><td>R4</td><td>1</td><td>t=4,30 s, q.129</td><td class="ok">acerto</td></tr>
+  <tr><td>seq_13</td><td>ajuste</td><td>Frenagem forte e parada sem contato</td><td>SEM ACID.</td><td>SEM ACID.</td><td>-</td><td>-</td><td>0</td><td>-</td><td class="ok">acerto</td></tr>
+  <tr><td>seq_14</td><td>aval.</td><td>Aproximação de veículo parado sem impacto</td><td>SEM ACID.</td><td>SEM ACID.</td><td>-</td><td>-</td><td>0</td><td>-</td><td class="ok">acerto</td></tr>
+</table>
+<p style="font-size:9pt">* Na <b>1ª execução</b> da avaliação, seq_04 saiu <b>INDETERMINADO</b> (ver 9.4). O resultado acima é da 2ª execução, após a correção de um defeito de lógica, sem mudança de pesos ou limiares. As duas execuções estão salvas (<code>results/avaliacao_execucao1.json</code> e <code>results/avaliacao.json</code>).<br>
+** Na noite, o detector <b>não chegou a rastrear os veículos</b>. A saída INDETERMINADO veio do alerta de visibilidade, não da análise do impacto.</p>
+
+<table>
+  <tr><th>Métrica (14 vídeos)</th><th>1ª execução</th><th>Final</th></tr>
+  <tr><td>Alerta quando há impacto (VP / FN), incluindo os 2 com visibilidade ruim</td><td>9 / 0</td><td>9 / 0</td></tr>
+  <tr><td>Falso positivo em vídeo sem acidente (FP / VN)</td><td>0 / 5</td><td>0 / 5</td></tr>
+  <tr><td>Precisão / recall de detecção</td><td>1,00 / 1,00</td><td>1,00 / 1,00</td></tr>
+  <tr><td>Acurácia de classificação nas 7 colisões</td><td>6/7 (0,857)</td><td>7/7 (1,00)</td></tr>
+  <tr><td>Vídeos com mais de um event_id (duplicata)</td><td>0</td><td>0</td></tr>
+  <tr><td>Latência média contato → evento (tempo de vídeo)</td><td>0,60 s</td><td>0,60 s</td></tr>
+  <tr><td>Tempo de processamento</td><td colspan="2">≈ 1,5 a 2,6 s por vídeo de 8 a 9 s (≈ 150 quadros/s, 960×540, CPU)</td></tr>
+</table>
+
+<div class="imgs">
+  <figure><img src="img/ev_traseira.jpg"><figcaption>seq_01: traseira, conf. 0,87 (avaliação)</figcaption></figure>
+  <figure><img src="img/ev_frontal.jpg"><figcaption>seq_03: frontal, conf. 1,00 (avaliação)</figcaption></figure>
+  <figure><img src="img/ev_lateral.jpg"><figcaption>seq_04: lateral, conf. 0,93 (avaliação)</figcaption></figure>
+  <figure><img src="img/ev_neblina.jpg"><figcaption>seq_10: neblina → INDETERMINADO (contato visto, visibilidade 0)</figcaption></figure>
+</div>
+
+<h3>9.3 Testes de integração (<code>python -m tools.integration_test</code>): 18/18 verificações</h3>
+<p>Executado com broker local (amqtt), central real e o gêmeo Python do firmware (<code>tools/esp32_sim.py</code>, mesma máquina de estados do <code>sketch.ino</code>). O broker foi derrubado e religado de verdade durante o teste. Logs e exportação estão em <code>results/integracao/</code>.</p>
+<table>
+  <tr><th>Teste da proposta</th><th>Verificação</th><th>Evidência registrada</th><th></th></tr>
+  <tr><td>Integração completa</td><td>vídeo seq_06 → evento na central → SUSPEITA aplicado no ESP32</td><td>EVT-…-E638 COLISAO_TRASEIRA; CMD-24F5A582 APLICADO</td><td class="ok">OK</td></tr>
+  <tr><td>Confirmação e rejeição</td><td>CONFIRMAR → ESP32 CONFIRMADO; horários enviado/recebido/aplicado gravados</td><td>CMD-87032D5B</td><td class="ok">OK</td></tr>
+  <tr><td>Confirmação e rejeição</td><td>seq_02 (frontal) REJEITAR → ESP32 volta a NORMAL</td><td>EVT-…-1789 REJEITADO</td><td class="ok">OK</td></tr>
+  <tr><td>Encerramento</td><td>ENCERRAR → ESP32 NORMAL; ocorrência ENCERRADO</td><td>histórico de ações</td><td class="ok">OK</td></tr>
+  <tr><td>Comando duplicado</td><td>reenvio do mesmo command_id → ACK DUPLICADO, sem nova atuação</td><td>ESP32_DUPLICATA_DESCARTADA</td><td class="ok">OK</td></tr>
+  <tr><td>Comando duplicado</td><td>novo comando SUSPEITA para evento encerrado não reabre</td><td>ESP32 permanece NORMAL</td><td class="ok">OK</td></tr>
+  <tr><td>Duplicata de evento</td><td>mesmo event_id/versão republicado → 1 ocorrência</td><td>DUPLICATA_IGNORADA</td><td class="ok">OK</td></tr>
+  <tr><td>Trânsito sem acidente</td><td>seq_13 (frenagem/parada) não cria ocorrência</td><td>saída SEM_ACIDENTE</td><td class="ok">OK</td></tr>
+  <tr><td>Ocorrência persistente / visibilidade</td><td>neblina: alerta + contato = 2 publicações com 1 event_id; INDETERMINADO/R1</td><td>versão 2 na central</td><td class="ok">OK</td></tr>
+  <tr><td>Broker indisponível</td><td>broker parado → ESP32 FALHA e central "desconectado"; broker religado → reconexão sem reiniciar</td><td>recuperação em 2,1 s</td><td class="ok">OK</td></tr>
+  <tr><td>Heartbeat / dados desatualizados</td><td>central parada → ESP32 FALHA (sem PING &gt; 15 s); central de volta → NORMAL</td><td>FALHA após 9,9 s sem a central (último PING ≈ 5 s antes)</td><td class="ok">OK</td></tr>
+  <tr><td>Histórico</td><td>central reiniciada mantém o histórico (SQLite)</td><td>3 ocorrências preservadas</td><td class="ok">OK</td></tr>
+</table>
+<p>No mesmo teste, o comando REJEITAR do evento de neblina foi enviado logo antes de o broker ser derrubado. A central retransmitiu (tentativa 2) e o ESP32 respondeu DUPLICADO, sem atuar de novo. Esse é o mecanismo de retransmissão funcionando num caso real.</p>
+<div class="box warn"><b>ESP32 no Wokwi:</b> o firmware <code>esp32/sketch.ino</code> implementa a mesma lógica validada pelo gêmeo. <span class="todo">Preencher após rodar o projeto Wokwi: link, captura do circuito e do Serial Monitor mostrando ACK RECEBIDO/APLICADO, troca de estados e FALHA → reconexão.</span></div>
+
+<h3>9.4 Análise dos erros</h3>
+<ul>
+  <li><b>seq_04 (1ª execução: colisão lateral classificada como INDETERMINADO).</b> Cerca de 0,3 s antes do impacto real, um terceiro veículo passou muito perto do veículo que bateria, e as caixas alinhadas aos eixos se tocaram. Esse quase-contato virou um candidato com aproximação 1,0, mas impacto 0 e persistência 0 (base 0,50): o INDETERMINADO foi correto para aquele instante. O impacto real (base 0,935) aconteceu em seguida, envolvendo a mesma trilha, e o controle de duplicatas o agregou à ocorrência já aberta <i>sem atualizar a classificação</i>. Correção: quando a mesma ocorrência recebe evidência mais forte, ela é republicada com o mesmo event_id e versão +1. Nenhum peso ou limiar mudou. <b>Ressalva:</b> como a correção veio depois de ver o resultado da avaliação, a 2ª execução já não é totalmente "cega".</li>
+  <li><b>seq_11 (noite).</b> Com brilho em torno de 20% do normal, o MOG2 não segmentou os veículos e não houve candidato de colisão. O sistema não inventou certeza: emitiu INDETERMINADO por visibilidade insuficiente e pediu revisão. Mas, se a visibilidade fosse apenas "razoável" e a detecção falhasse, o resultado seria um <b>falso negativo</b> silencioso.</li>
+  <li><b>seq_10 (neblina).</b> O contato foi detectado e a geometria indicava traseira (ângulo 0,3°). Como a visibilidade era 0, a confiança caiu para 0,35 e a saída foi INDETERMINADO, como esperado.</li>
+  <li><b>Falsos positivos:</b> nenhum nos 5 vídeos sem acidente. A frenagem com parada (seq_13) e a aproximação de veículo parado (seq_14) não chegaram a gerar contato. O termo <code>impacto</code>, que exige queda brusca de velocidade <i>depois</i> do contato, é o que protege contra o caso clássico "duas caixas encostadas".</li>
+</ul>
+
+<h2>10. Limitações</h2>
+<ul>
+  <li><b>Os dados são sintéticos.</b> Os 100% de acerto valem só para estas simulações: geometria vista de cima, veículos retangulares, fundo estático, câmera fixa e sem sombras ou oclusões reais. Não há evidência de desempenho em vídeo real de rodovia. É preciso testar com vídeos públicos reais, possivelmente trocando o MOG2 por um detector pré-treinado (YOLO) e recalibrando escala, limiares e a referência de contraste.</li>
+  <li>Os limiares estão em pixels e dependem da escala e do FPS da câmera. A referência de visibilidade é calibrada por câmera.</li>
+  <li>Capotamento e atropelamento não foram implementados; não há detector de pedestres (indicador "desconhecido").</li>
+  <li>A confiança é heurística, não uma probabilidade calibrada. A amostra (14 vídeos) é pequena para métricas estatisticamente significativas.</li>
+  <li>Os testes automáticos de integração usaram o gêmeo em Python do ESP32. A execução no Wokwi foi feita manualmente (ver 9.3).</li>
+  <li>A central é um protótipo: servidor Flask de desenvolvimento, sem autenticação de operador e com broker público sem TLS.</li>
+</ul>
+<h2>11. Melhorias propostas</h2>
+<ul>
+  <li>Detector pré-treinado (YOLOv8 ou similar) com rastreador (ByteTrack) para vídeos reais, mantendo a mesma análise temporal.</li>
+  <li>Fluxo óptico ou homografia para medir velocidade em m/s em câmeras oblíquas; detecção de capotamento pela variação da razão de aspecto e rotação da caixa orientada.</li>
+  <li>Calibrar a confiança (por exemplo, regressão logística) com um conjunto rotulado maior; medir precisão, recall e latência em tempo real.</li>
+  <li>Broker com TLS e usuário/senha; autenticação do operador na central; QoS 1 também no ESP32 (biblioteca alternativa ou ESP-IDF MQTT).</li>
+</ul>
+
+<h2>12. Referências</h2>
+<ul style="font-size:9.5pt">
+  <li>Zivkovic, Z. "Improved adaptive Gaussian mixture model for background subtraction", ICPR 2004 (base do MOG2). Documentação OpenCV: <i>BackgroundSubtractorMOG2</i>, <i>findContours</i>, <i>minAreaRect</i>.</li>
+  <li>OASIS. <i>MQTT Version 3.1.1</i>, 2014 (QoS, mensagens retidas, Last Will).</li>
+  <li>Eclipse Paho MQTT Python Client: https://eclipse.dev/paho/</li>
+  <li>PubSubClient (N. O'Leary), ArduinoJson (B. Blanchon), LiquidCrystal_I2C: bibliotecas Arduino.</li>
+  <li>Wokwi: simulador ESP32 (https://docs.wokwi.com), gateway Wi-Fi "Wokwi-GUEST".</li>
+  <li>HiveMQ Public MQTT Broker: broker.hivemq.com:1883.</li>
+  <li>Flask 3 (https://flask.palletsprojects.com), SQLite, amqtt (broker MQTT em Python para testes).</li>
+  <li>Proposta "Projeto Motiva | Motiva Vision", Prof. Marcelo Fernando Morgantini, FIAP, 2026.</li>
+</ul>
+<p class="muted" style="font-size:8.5pt">Todo o conteúdo usa dados fictícios. Nenhuma imagem de pessoas ou informação pessoal foi transmitida pelo broker público.</p>
+</body>
+</html>

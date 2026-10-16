@@ -1,0 +1,9 @@
+[central] painel em http://localhost:5055  tópicos motiva/rm-teste/#
+ * Serving Flask app 'app'
+ * Debug mode: off
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on http://127.0.0.1:5055
+Press CTRL+C to quit
+127.0.0.1 - - [15/Oct/2026 19:55:00] "GET /api/state HTTP/1.1" 200 -
+127.0.0.1 - - [15/Oct/2026 19:55:00] "GET /api/export.json HTTP/1.1" 200 -
+127.0.0.1 - - [15/Oct/2026 19:55:00] "GET /api/export.csv HTTP/1.1" 200 -

@@ -1,0 +1,86 @@
+{
+  "seq_01": {
+    "arquivo": "videos/seq_01.mp4",
+    "camera_id": "CAM-SP000-KM112-R",
+    "conjunto": "avaliacao",
+    "fps": 30
+  },
+  "seq_02": {
+    "arquivo": "videos/seq_02.mp4",
+    "camera_id": "CAM-SP000-KM112-R",
+    "conjunto": "ajuste",
+    "fps": 30
+  },
+  "seq_03": {
+    "arquivo": "videos/seq_03.mp4",
+    "camera_id": "CAM-SP000-KM112-R",
+    "conjunto": "avaliacao",
+    "fps": 30
+  },
+  "seq_04": {
+    "arquivo": "videos/seq_04.mp4",
+    "camera_id": "CAM-SP000-KM118-X",
+    "conjunto": "avaliacao",
+    "fps": 30
+  },
+  "seq_05": {
+    "arquivo": "videos/seq_05.mp4",
+    "camera_id": "CAM-SP000-KM112-R",
+    "conjunto": "avaliacao",
+    "fps": 30
+  },
+  "seq_06": {
+    "arquivo": "videos/seq_06.mp4",
+    "camera_id": "CAM-SP000-KM112-R",
+    "conjunto": "ajuste",
+    "fps": 30
+  },
+  "seq_07": {
+    "arquivo": "videos/seq_07.mp4",
+    "camera_id": "CAM-SP000-KM118-X",
+    "conjunto": "ajuste",
+    "fps": 30
+  },
+  "seq_08": {
+    "arquivo": "videos/seq_08.mp4",
+    "camera_id": "CAM-SP000-KM118-X",
+    "conjunto": "avaliacao",
+    "fps": 30
+  },
+  "seq_09": {
+    "arquivo": "videos/seq_09.mp4",
+    "camera_id": "CAM-SP000-KM112-R",
+    "conjunto": "ajuste",
+    "fps": 30
+  },
+  "seq_10": {
+    "arquivo": "videos/seq_10.mp4",
+    "camera_id": "CAM-SP000-KM112-R",
+    "conjunto": "ajuste",
+    "fps": 30
+  },
+  "seq_11": {
+    "arquivo": "videos/seq_11.mp4",
+    "camera_id": "CAM-SP000-KM118-X",
+    "conjunto": "avaliacao",
+    "fps": 30
+  },
+  "seq_12": {
+    "arquivo": "videos/seq_12.mp4",
+    "camera_id": "CAM-SP000-KM112-R",
+    "conjunto": "avaliacao",
+    "fps": 30
+  },
+  "seq_13": {
+    "arquivo": "videos/seq_13.mp4",
+    "camera_id": "CAM-SP000-KM112-R",
+    "conjunto": "ajuste",
+    "fps": 30
+  },
+  "seq_14": {
+    "arquivo": "videos/seq_14.mp4",
+    "camera_id": "CAM-SP000-KM112-R",
+    "conjunto": "avaliacao",
+    "fps": 30
+  }
+}

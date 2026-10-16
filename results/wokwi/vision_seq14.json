@@ -1,0 +1,12 @@
+{
+  "seq_14.mp4": {
+    "video": "seq_14.mp4",
+    "camera_id": "CAM-SP000-KM112-R",
+    "quadros": 270,
+    "fps": 30.0,
+    "tempo_proc_s": 1.57,
+    "eventos": [],
+    "candidatos": [],
+    "saida": "SEM_ACIDENTE"
+  }
+}

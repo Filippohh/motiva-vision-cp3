@@ -51,10 +51,10 @@
 
 <h3>Links para validação</h3>
 <table>
-  <tr><td style="width:30%">Repositório (código completo)</td><td><span class="todo">https://github.com/USUARIO/motiva-vision</span></td></tr>
-  <tr><td>Projeto Wokwi (ESP32)</td><td><span class="todo">https://wokwi.com/projects/XXXXXXXX</span></td></tr>
-  <tr><td>Vídeo de demonstração (opcional)</td><td><span class="todo">https://youtu.be/XXXXXXX</span></td></tr>
-  <tr><td>Evidências no repositório</td><td><code>results/avaliacao.json</code>, <code>results/evidencias_avaliacao/</code>, <code>results/integracao/</code> (logs MQTT, export CSV/JSON da central, resultado dos testes)</td></tr>
+  <tr><td style="width:30%">Repositório (código completo)</td><td><a href="https://github.com/Filippohh/motiva-vision-cp3">https://github.com/Filippohh/motiva-vision-cp3</a></td></tr>
+  <tr><td>Projeto Wokwi (ESP32)</td><td><a href="https://wokwi.com/projects/477997464824978433">https://wokwi.com/projects/477997464824978433</a></td></tr>
+  <tr><td>Vídeo de demonstração (opcional)</td><td>não incluído (item opcional)</td></tr>
+  <tr><td>Evidências no repositório</td><td><code>results/avaliacao.json</code>, <code>results/evidencias_avaliacao/</code>, <code>results/integracao/</code> (teste automatizado: logs MQTT, export CSV/JSON da central) e <code>results/wokwi/</code> (execução com o ESP32 no Wokwi + broker HiveMQ)</td></tr>
 </table>
 
 <h2>1. Visão geral e arquitetura</h2>
@@ -222,7 +222,7 @@
   <tr><td>seq_13</td><td>ajuste</td><td>Frenagem forte e parada sem contato</td><td>SEM ACID.</td><td>SEM ACID.</td><td>-</td><td>-</td><td>0</td><td>-</td><td class="ok">acerto</td></tr>
   <tr><td>seq_14</td><td>aval.</td><td>Aproximação de veículo parado sem impacto</td><td>SEM ACID.</td><td>SEM ACID.</td><td>-</td><td>-</td><td>0</td><td>-</td><td class="ok">acerto</td></tr>
 </table>
-<p style="font-size:9pt">* Na <b>1ª execução</b> da avaliação, seq_04 saiu <b>INDETERMINADO</b> (ver 9.4). O resultado acima é da 2ª execução, após a correção de um defeito de lógica, sem mudança de pesos ou limiares. As duas execuções estão salvas (<code>results/avaliacao_execucao1.json</code> e <code>results/avaliacao.json</code>).<br>
+<p style="font-size:9pt">* Na <b>1ª execução</b> da avaliação, seq_04 saiu <b>INDETERMINADO</b> (ver 9.5). O resultado acima é da 2ª execução, após a correção de um defeito de lógica, sem mudança de pesos ou limiares. As duas execuções estão salvas (<code>results/avaliacao_execucao1.json</code> e <code>results/avaliacao.json</code>).<br>
 ** Na noite, o detector <b>não chegou a rastrear os veículos</b>. A saída INDETERMINADO veio do alerta de visibilidade, não da análise do impacto.</p>
 
 <table>
@@ -261,9 +261,29 @@
   <tr><td>Histórico</td><td>central reiniciada mantém o histórico (SQLite)</td><td>3 ocorrências preservadas</td><td class="ok">OK</td></tr>
 </table>
 <p>No mesmo teste, o comando REJEITAR do evento de neblina foi enviado logo antes de o broker ser derrubado. A central retransmitiu (tentativa 2) e o ESP32 respondeu DUPLICADO, sem atuar de novo. Esse é o mecanismo de retransmissão funcionando num caso real.</p>
-<div class="box warn"><b>ESP32 no Wokwi:</b> o firmware <code>esp32/sketch.ino</code> implementa a mesma lógica validada pelo gêmeo. <span class="todo">Preencher após rodar o projeto Wokwi: link, captura do circuito e do Serial Monitor mostrando ACK RECEBIDO/APLICADO, troca de estados e FALHA → reconexão.</span></div>
+<h3>9.4 Execução com o ESP32 no Wokwi (broker público HiveMQ)</h3>
+<p>Cadeia completa executada em 15/10/2026 com o firmware real no Wokwi (<a href="https://wokwi.com/projects/477997464824978433">projeto</a>), a central em <code>localhost:5000</code> e a visão publicando em <code>motiva/rm565994/eventos</code> no <code>broker.hivemq.com</code>. Exportação completa em <code>results/wokwi/export_central_wokwi.json</code> e <code>.csv</code>.</p>
+<table>
+  <tr><th>Passo</th><th>Resultado observado</th><th></th></tr>
+  <tr><td>Boot do ESP32</td><td>Wi-Fi Wokwi-GUEST, conexão MQTT, LCD "Via: NORMAL / monitorando", LED verde, HEARTBEAT a cada 5 s visto pela central (ESP32 online)</td><td class="ok">OK</td></tr>
+  <tr><td>seq_07 (lateral) → visão → central</td><td>EVT-20261015-220328-KM118-CB77, COLISAO_LATERAL, conf. 0,98, R3; SUSPEITA enviado 22:03:28, recebido 22:03:29, aplicado 22:03:30; LED amarelo piscando</td><td class="ok">OK</td></tr>
+  <tr><td>CONFIRMAR (operador)</td><td>CMD-E3685978 enviado/recebido/aplicado entre 22:04:02 e 22:04:03; LED vermelho + buzzer; LCD "CONFIRMADO"</td><td class="ok">OK</td></tr>
+  <tr><td>Reenvio do mesmo command_id</td><td>ACK DUPLICADO, sem nova atuação (ESP32_DUPLICATA_DESCARTADA)</td><td class="ok">OK</td></tr>
+  <tr><td>ENCERRAR</td><td>CMD-257DE743 aplicado; ESP32 volta a NORMAL</td><td class="ok">OK</td></tr>
+  <tr><td>Central parada (sem PING)</td><td>ESP32 entra em FALHA ("central muda", roxo); ao religar a central, volta a NORMAL em ≈ 7 s; histórico preservado</td><td class="ok">OK</td></tr>
+  <tr><td>seq_03 (frontal) + REJEITAR</td><td>EVT-…-7A6A COLISAO_FRONTAL, R2; REJEITAR aplicado; ESP32 NORMAL</td><td class="ok">OK</td></tr>
+  <tr><td>seq_14 (sem acidente)</td><td>nenhuma ocorrência criada</td><td class="ok">OK</td></tr>
+  <tr><td>Broker indisponível</td><td>não reproduzível no broker público (não é possível desligá-lo); validado com broker local e o gêmeo do firmware (9.3)</td><td>parcial</td></tr>
+</table>
+<div class="imgs">
+  <figure><img src="img/wokwi_suspeita.png"><figcaption>SUSPEITA: amarelo piscando (foto no instante apagado), LCD "1 ativa SUSPEITA"</figcaption></figure>
+  <figure><img src="img/wokwi_confirmado.png"><figcaption>CONFIRMADO: vermelho + buzzer</figcaption></figure>
+  <figure><img src="img/wokwi_normal.png"><figcaption>ENCERRAR → NORMAL (verde)</figcaption></figure>
+  <figure><img src="img/wokwi_falha.png"><figcaption>FALHA: central parada ("central muda", roxo piscando)</figcaption></figure>
+</div>
+<div class="box warn"><b>Defeito encontrado só no Wokwi:</b> na primeira execução, o ESP32 enviava o ACK RECEBIDO correto, mas os ACKs seguintes saíam com o <code>command_id</code> corrompido, e a central marcou o SUSPEITA como SEM_CONFIRMACAO após 3 tentativas (evento EVT-…-1D40, preservado no histórico). Causa: o ArduinoJson, no modo zero-copy, aponta as strings para dentro do buffer do PubSubClient, e o <code>publish()</code> do primeiro ACK sobrescreve esse buffer. O gêmeo em Python não reproduz esse comportamento de memória. Correção: copiar <code>acao</code>, <code>command_id</code> e <code>event_id</code> para arrays locais antes de publicar (commit 3fbcafe). Com o firmware corrigido, todos os comandos foram aplicados na 1ª tentativa.</div>
 
-<h3>9.4 Análise dos erros</h3>
+<h3>9.5 Análise dos erros</h3>
 <ul>
   <li><b>seq_04 (1ª execução: colisão lateral classificada como INDETERMINADO).</b> Cerca de 0,3 s antes do impacto real, um terceiro veículo passou muito perto do veículo que bateria, e as caixas alinhadas aos eixos se tocaram. Esse quase-contato virou um candidato com aproximação 1,0, mas impacto 0 e persistência 0 (base 0,50): o INDETERMINADO foi correto para aquele instante. O impacto real (base 0,935) aconteceu em seguida, envolvendo a mesma trilha, e o controle de duplicatas o agregou à ocorrência já aberta <i>sem atualizar a classificação</i>. Correção: quando a mesma ocorrência recebe evidência mais forte, ela é republicada com o mesmo event_id e versão +1. Nenhum peso ou limiar mudou. <b>Ressalva:</b> como a correção veio depois de ver o resultado da avaliação, a 2ª execução já não é totalmente "cega".</li>
   <li><b>seq_11 (noite).</b> Com brilho em torno de 20% do normal, o MOG2 não segmentou os veículos e não houve candidato de colisão. O sistema não inventou certeza: emitiu INDETERMINADO por visibilidade insuficiente e pediu revisão. Mas, se a visibilidade fosse apenas "razoável" e a detecção falhasse, o resultado seria um <b>falso negativo</b> silencioso.</li>
@@ -277,7 +297,7 @@
   <li>Os limiares estão em pixels e dependem da escala e do FPS da câmera. A referência de visibilidade é calibrada por câmera.</li>
   <li>Capotamento e atropelamento não foram implementados; não há detector de pedestres (indicador "desconhecido").</li>
   <li>A confiança é heurística, não uma probabilidade calibrada. A amostra (14 vídeos) é pequena para métricas estatisticamente significativas.</li>
-  <li>Os testes automáticos de integração usaram o gêmeo em Python do ESP32. A execução no Wokwi foi feita manualmente (ver 9.3).</li>
+  <li>O teste de broker indisponível foi feito com broker local e o gêmeo em Python do firmware; no Wokwi (broker público) foi verificada a FALHA por perda da central, não do broker.</li>
   <li>A central é um protótipo: servidor Flask de desenvolvimento, sem autenticação de operador e com broker público sem TLS.</li>
 </ul>
 <h2>11. Melhorias propostas</h2>

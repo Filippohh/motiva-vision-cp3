@@ -1,0 +1,25 @@
+[central] painel em http://localhost:5000  tópicos motiva/rm565994/#
+ * Tip: There are .env files present. Install python-dotenv to use them.
+ * Serving Flask app 'app'
+ * Debug mode: off
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on http://127.0.0.1:5000
+Press CTRL+C to quit
+[central] conectado ao broker broker.hivemq.com rc=0
+127.0.0.1 - - [15/Oct/2026 22:05:05] "GET /api/state HTTP/1.1" 200 -
+127.0.0.1 - - [15/Oct/2026 22:05:07] "GET /api/state HTTP/1.1" 200 -
+127.0.0.1 - - [15/Oct/2026 22:05:09] "GET /api/state HTTP/1.1" 200 -
+127.0.0.1 - - [15/Oct/2026 22:05:19] "GET /api/state HTTP/1.1" 200 -
+127.0.0.1 - - [15/Oct/2026 22:05:19] "POST /api/ocorrencias/EVT-20261015-220512-KM112-7A6A/acao HTTP/1.1" 200 -
+127.0.0.1 - - [15/Oct/2026 22:05:28] "GET /api/state HTTP/1.1" 200 -
+127.0.0.1 - - [15/Oct/2026 22:05:35] "POST /api/ocorrencias/EVT-20261015-220152-KM118-1D40/acao HTTP/1.1" 200 -
+127.0.0.1 - - [15/Oct/2026 22:06:01] "GET /api/export.json HTTP/1.1" 200 -
+127.0.0.1 - - [15/Oct/2026 22:06:01] "GET /api/export.csv HTTP/1.1" 200 -
+127.0.0.1 - - [15/Oct/2026 22:06:02] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [15/Oct/2026 22:06:02] "GET /api/state HTTP/1.1" 200 -
+127.0.0.1 - - [15/Oct/2026 22:06:02] "GET /favicon.ico HTTP/1.1" 404 -
+127.0.0.1 - - [15/Oct/2026 22:06:02] "GET /evidencias/EVT-20261015-220512-KM112-7A6A.jpg?v=1 HTTP/1.1" 200 -
+127.0.0.1 - - [15/Oct/2026 22:06:02] "GET /api/state HTTP/1.1" 200 -
+127.0.0.1 - - [15/Oct/2026 22:06:02] "GET /api/state HTTP/1.1" 200 -
+127.0.0.1 - - [15/Oct/2026 22:06:02] "GET /api/state HTTP/1.1" 200 -
+127.0.0.1 - - [15/Oct/2026 22:06:02] "GET /api/state HTTP/1.1" 200 -

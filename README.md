@@ -4,6 +4,8 @@ Protótipo acadêmico (CP3, Prof. Marcelo Morgantini). A cadeia é:
 
 **vídeo → visão computacional (Python/OpenCV) → MQTT → central operacional (Flask + SQLite) → decisão humana → ESP32 (Wokwi) → ACK de execução → central**
 
+**Projeto Wokwi (ESP32):** https://wokwi.com/projects/477997464824978433 · **Relatório:** [`docs/relatorio.pdf`](docs/relatorio.pdf) · Grupo 2CCPX (entrega: Filippo Picino Mendez, RM565994)
+
 > Simulação acadêmica. As recomendações são regras fictícias: não fazem diagnóstico e não acionam serviços reais. A decisão é sempre do operador.
 
 ## Estrutura
@@ -33,7 +35,7 @@ Copie `.env.example` para `.env` e defina `MOTIVA_RM` (o mesmo valor do `#define
 ## Execução (demonstração completa no broker público)
 
 1. **Central**: `python -m central.app`, depois abra http://localhost:5000
-2. **ESP32 no Wokwi**: crie um projeto ESP32 em https://wokwi.com, cole `esp32/sketch.ino` e `esp32/diagram.json` e adicione as bibliotecas de `esp32/libraries.txt` (PubSubClient, ArduinoJson 6, LiquidCrystal I2C). Ajuste `RM` e clique em ▶. O ESP32 usa `Wokwi-GUEST` e o `broker.hivemq.com:1883`.
+2. **ESP32 no Wokwi**: abra https://wokwi.com/projects/477997464824978433 e clique em ▶ (ou crie um projeto ESP32, cole `esp32/sketch.ino` e `esp32/diagram.json` e adicione as bibliotecas de `esp32/libraries.txt` (PubSubClient, ArduinoJson 6, LiquidCrystal I2C). e ajuste `RM`). O ESP32 usa `Wokwi-GUEST` e o `broker.hivemq.com:1883`.
    *Sem Wokwi:* `python -m tools.esp32_sim` roda a mesma lógica em Python.
 3. **Visão**: `python -m vision.run_vision --video dataset/videos/seq_07.mp4 --camera CAM-SP000-KM118-X --realtime`
    ou `python -m vision.run_vision --all` para todos os vídeos.

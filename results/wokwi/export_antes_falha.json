@@ -1,0 +1,433 @@
+{
+  "exportado_em": "2026-10-15T22:04:31-03:00",
+  "ocorrencias": [
+    {
+      "ocorrencia": {
+        "event_id": "EVT-20261015-220152-KM118-1D40",
+        "versao": 1,
+        "recebido_em": "2026-10-15T22:01:53-03:00",
+        "atualizado_em": "2026-10-15T22:01:53-03:00",
+        "camera_id": "CAM-SP000-KM118-X",
+        "tipo": "COLISAO_LATERAL",
+        "confianca": 0.981,
+        "estado": "SUSPEITA",
+        "regra": "R3",
+        "recurso": "AMBULANCIA_SIMULADA"
+      },
+      "evento": {
+        "schema": "motiva.evento.v1",
+        "event_id": "EVT-20261015-220152-KM118-1D40",
+        "versao": 1,
+        "timestamp": "2026-10-15T22:01:52-03:00",
+        "camera_id": "CAM-SP000-KM118-X",
+        "local": {
+          "rodovia": "SP-000 (fictícia)",
+          "km": 118.0,
+          "trecho": "Interseção com acesso municipal",
+          "municipio": "Cidade Exemplo/SP"
+        },
+        "tipo": "COLISAO_LATERAL",
+        "confianca": {
+          "valor": 0.981,
+          "nivel": "ALTA",
+          "limiar": 0.6,
+          "componentes": {
+            "aprox": 1.0,
+            "impacto": 1.0,
+            "persist": 0.909,
+            "clareza": 0.998
+          },
+          "definicao": "0..1 = soma ponderada (aprox 0,25; impacto 0,30; persistência 0,20; clareza do ângulo 0,25) x (0,4 + 0,6 x visibilidade). ALTA >= 0,80; MEDIA >= 0,60; BAIXA < 0,60 -> INDETERMINADO."
+        },
+        "indicadores": {
+          "veiculos_envolvidos": 2,
+          "faixa_obstruida": [
+            "H-OESTE",
+            "V-SUL",
+            "V-NORTE"
+          ],
+          "velocidade_relativa_kmh": 49.8,
+          "impacto_alta_energia": true,
+          "veiculos_parados_apos_contato": true,
+          "angulo_trajetorias_graus": 89.9,
+          "pedestres": "desconhecido",
+          "visibilidade": 1.0
+        },
+        "recomendacao": {
+          "regra": "R3",
+          "recurso": "AMBULANCIA_SIMULADA",
+          "justificativa": "Sugerir atendimento por ambulância na simulação. Regra R3: Colisão lateral/traseira com indicador de impacto de alta energia (vel. relativa > 40 km/h). Indicadores: vel. relativa estimada 50 km/h; faixa obstruída: H-OESTE, V-SUL, V-NORTE; veículos envolvidos: 2."
+        },
+        "estado": "SUSPEITA",
+        "evidencia": {
+          "fonte": "seq_07.mp4",
+          "frame": 93,
+          "tempo_video_s": 3.1,
+          "frame_decisao": 113,
+          "imagem": "evidencias/EVT-20261015-220152-KM118-1D40.jpg",
+          "clip": "evidencias/EVT-20261015-220152-KM118-1D40.mp4"
+        }
+      },
+      "acoes": [
+        {
+          "id": 1,
+          "event_id": "EVT-20261015-220152-KM118-1D40",
+          "acao": "EVENTO_RECEBIDO",
+          "operador": "sistema",
+          "ts": "2026-10-15T22:01:53-03:00",
+          "observacao": "tipo=COLISAO_LATERAL conf=0.981"
+        },
+        {
+          "id": 2,
+          "event_id": "EVT-20261015-220152-KM118-1D40",
+          "acao": "COMANDO_SEM_CONFIRMACAO",
+          "operador": "sistema",
+          "ts": "2026-10-15T22:02:11-03:00",
+          "observacao": "CMD-E0101483"
+        }
+      ],
+      "comandos": [
+        {
+          "command_id": "CMD-E0101483",
+          "event_id": "EVT-20261015-220152-KM118-1D40",
+          "acao": "SUSPEITA",
+          "status": "SEM_CONFIRMACAO",
+          "tentativas": 3,
+          "enviado_em": "2026-10-15T22:01:53-03:00",
+          "recebido_em": "2026-10-15T22:01:54-03:00",
+          "aplicado_em": null,
+          "resposta": null
+        }
+      ]
+    },
+    {
+      "ocorrencia": {
+        "event_id": "EVT-20261015-220328-KM118-CB77",
+        "versao": 1,
+        "recebido_em": "2026-10-15T22:03:28-03:00",
+        "atualizado_em": "2026-10-15T22:04:20-03:00",
+        "camera_id": "CAM-SP000-KM118-X",
+        "tipo": "COLISAO_LATERAL",
+        "confianca": 0.981,
+        "estado": "ENCERRADO",
+        "regra": "R3",
+        "recurso": "AMBULANCIA_SIMULADA"
+      },
+      "evento": {
+        "schema": "motiva.evento.v1",
+        "event_id": "EVT-20261015-220328-KM118-CB77",
+        "versao": 1,
+        "timestamp": "2026-10-15T22:03:28-03:00",
+        "camera_id": "CAM-SP000-KM118-X",
+        "local": {
+          "rodovia": "SP-000 (fictícia)",
+          "km": 118.0,
+          "trecho": "Interseção com acesso municipal",
+          "municipio": "Cidade Exemplo/SP"
+        },
+        "tipo": "COLISAO_LATERAL",
+        "confianca": {
+          "valor": 0.981,
+          "nivel": "ALTA",
+          "limiar": 0.6,
+          "componentes": {
+            "aprox": 1.0,
+            "impacto": 1.0,
+            "persist": 0.909,
+            "clareza": 0.998
+          },
+          "definicao": "0..1 = soma ponderada (aprox 0,25; impacto 0,30; persistência 0,20; clareza do ângulo 0,25) x (0,4 + 0,6 x visibilidade). ALTA >= 0,80; MEDIA >= 0,60; BAIXA < 0,60 -> INDETERMINADO."
+        },
+        "indicadores": {
+          "veiculos_envolvidos": 2,
+          "faixa_obstruida": [
+            "H-OESTE",
+            "V-SUL",
+            "V-NORTE"
+          ],
+          "velocidade_relativa_kmh": 49.8,
+          "impacto_alta_energia": true,
+          "veiculos_parados_apos_contato": true,
+          "angulo_trajetorias_graus": 89.9,
+          "pedestres": "desconhecido",
+          "visibilidade": 1.0
+        },
+        "recomendacao": {
+          "regra": "R3",
+          "recurso": "AMBULANCIA_SIMULADA",
+          "justificativa": "Sugerir atendimento por ambulância na simulação. Regra R3: Colisão lateral/traseira com indicador de impacto de alta energia (vel. relativa > 40 km/h). Indicadores: vel. relativa estimada 50 km/h; faixa obstruída: H-OESTE, V-SUL, V-NORTE; veículos envolvidos: 2."
+        },
+        "estado": "SUSPEITA",
+        "evidencia": {
+          "fonte": "seq_07.mp4",
+          "frame": 93,
+          "tempo_video_s": 3.1,
+          "frame_decisao": 113,
+          "imagem": "evidencias/EVT-20261015-220328-KM118-CB77.jpg",
+          "clip": "evidencias/EVT-20261015-220328-KM118-CB77.mp4"
+        }
+      },
+      "acoes": [
+        {
+          "id": 3,
+          "event_id": "EVT-20261015-220328-KM118-CB77",
+          "acao": "EVENTO_RECEBIDO",
+          "operador": "sistema",
+          "ts": "2026-10-15T22:03:28-03:00",
+          "observacao": "tipo=COLISAO_LATERAL conf=0.981"
+        },
+        {
+          "id": 4,
+          "event_id": "EVT-20261015-220328-KM118-CB77",
+          "acao": "CONFIRMAR",
+          "operador": "op.demo",
+          "ts": "2026-10-15T22:04:02-03:00",
+          "observacao": ""
+        },
+        {
+          "id": 5,
+          "event_id": "EVT-20261015-220328-KM118-CB77",
+          "acao": "REENVIO_MANUAL_TESTE_DUPLICATA",
+          "operador": "op.demo",
+          "ts": "2026-10-15T22:04:16-03:00",
+          "observacao": "CMD-E3685978"
+        },
+        {
+          "id": 6,
+          "event_id": "EVT-20261015-220328-KM118-CB77",
+          "acao": "ESP32_DUPLICATA_DESCARTADA",
+          "operador": "esp32",
+          "ts": "2026-10-15T22:04:18-03:00",
+          "observacao": "CMD-E3685978"
+        },
+        {
+          "id": 7,
+          "event_id": "EVT-20261015-220328-KM118-CB77",
+          "acao": "ENCERRAR",
+          "operador": "op.demo",
+          "ts": "2026-10-15T22:04:20-03:00",
+          "observacao": ""
+        }
+      ],
+      "comandos": [
+        {
+          "command_id": "CMD-33775C29",
+          "event_id": "EVT-20261015-220328-KM118-CB77",
+          "acao": "SUSPEITA",
+          "status": "APLICADO",
+          "tentativas": 1,
+          "enviado_em": "2026-10-15T22:03:28-03:00",
+          "recebido_em": "2026-10-15T22:03:29-03:00",
+          "aplicado_em": "2026-10-15T22:03:30-03:00",
+          "resposta": "{\"tipo\": \"ACK\", \"command_id\": \"CMD-33775C29\", \"event_id\": \"EVT-20261015-220328-KM118-CB77\", \"acao\": \"SUSPEITA\", \"fase\": \"APLICADO\", \"estado\": \"SUSPEITA\", \"uptime_s\": 26}"
+        },
+        {
+          "command_id": "CMD-E3685978",
+          "event_id": "EVT-20261015-220328-KM118-CB77",
+          "acao": "CONFIRMAR",
+          "status": "APLICADO",
+          "tentativas": 1,
+          "enviado_em": "2026-10-15T22:04:02-03:00",
+          "recebido_em": "2026-10-15T22:04:03-03:00",
+          "aplicado_em": "2026-10-15T22:04:03-03:00",
+          "resposta": "{\"tipo\": \"ACK\", \"command_id\": \"CMD-E3685978\", \"event_id\": \"EVT-20261015-220328-KM118-CB77\", \"acao\": \"CONFIRMAR\", \"fase\": \"APLICADO\", \"estado\": \"CONFIRMADO\", \"uptime_s\": 59}"
+        },
+        {
+          "command_id": "CMD-257DE743",
+          "event_id": "EVT-20261015-220328-KM118-CB77",
+          "acao": "ENCERRAR",
+          "status": "APLICADO",
+          "tentativas": 1,
+          "enviado_em": "2026-10-15T22:04:20-03:00",
+          "recebido_em": "2026-10-15T22:04:21-03:00",
+          "aplicado_em": "2026-10-15T22:04:21-03:00",
+          "resposta": "{\"tipo\": \"ACK\", \"command_id\": \"CMD-257DE743\", \"event_id\": \"EVT-20261015-220328-KM118-CB77\", \"acao\": \"ENCERRAR\", \"fase\": \"APLICADO\", \"estado\": \"NORMAL\", \"uptime_s\": 77}"
+        }
+      ]
+    }
+  ],
+  "mensagens_mqtt": [
+    {
+      "id": 1,
+      "ts": "2026-10-15T22:01:39-03:00",
+      "direcao": "RX",
+      "topico": "motiva/rm565994/status",
+      "payload": "{\"tipo\": \"ONLINE\", \"online\": true, \"estado\": \"NORMAL\"}"
+    },
+    {
+      "id": 2,
+      "ts": "2026-10-15T22:01:53-03:00",
+      "direcao": "RX",
+      "topico": "motiva/rm565994/eventos",
+      "payload": "{\"schema\": \"motiva.evento.v1\", \"event_id\": \"EVT-20261015-220152-KM118-1D40\", \"versao\": 1, \"timestamp\": \"2026-10-15T22:01:52-03:00\", \"camera_id\": \"CAM-SP000-KM118-X\", \"local\": {\"rodovia\": \"SP-000 (fictícia)\", \"km\": 118.0, \"trecho\": \"Interseção com acesso municipal\", \"municipio\": \"Cidade Exemplo/SP\"}, \"tipo\": \"COLISAO_LATERAL\", \"confianca\": {\"valor\": 0.981, \"nivel\": \"ALTA\", \"limiar\": 0.6, \"componentes\": {\"aprox\": 1.0, \"impacto\": 1.0, \"persist\": 0.909, \"clareza\": 0.998}, \"definicao\": \"0..1 = soma ponderada (aprox 0,25; impacto 0,30; persistência 0,20; clareza do ângulo 0,25) x (0,4 + 0,6 x visibilidade). ALTA >= 0,80; MEDIA >= 0,60; BAIXA < 0,60 -> INDETERMINADO.\"}, \"indicadores\": {\"veiculos_envolvidos\": 2, \"faixa_obstruida\": [\"H-OESTE\", \"V-SUL\", \"V-NORTE\"], \"velocidade_relativa_kmh\": 49.8, \"impacto_alta_energia\": true, \"veiculos_parados_apos_contato\": true, \"angulo_trajetorias_graus\": 89.9, \"pedestres\": \"desconhecido\", \"visibilidade\": 1.0}, \"recomendacao\": {\"regra\": \"R3\", \"recurso\": \"AMBULANCIA_SIMULADA\", \"justificativa\": \"Sugerir atendimento por ambulância na simulação. Regra R3: Colisão lateral/traseira com indicador de impacto de alta energia (vel. relativa > 40 km/h). Indicadores: vel. relativa estimada 50 km/h; faixa obstruída: H-OESTE, V-SUL, V-NORTE; veículos envolvidos: 2.\"}, \"estado\": \"SUSPEITA\", \"evidencia\": {\"fonte\": \"seq_07.mp4\", \"frame\": 93, \"tempo_video_s\": 3.1, \"frame_decisao\": 113, \"imagem\": \"evidencias/EVT-20261015-220152-KM118-1D40.jpg\", \"clip\": \"evidencias/EVT-20261015-220152-KM118-1D40.mp4\"}}"
+    },
+    {
+      "id": 3,
+      "ts": "2026-10-15T22:01:53-03:00",
+      "direcao": "TX",
+      "topico": "motiva/rm565994/comandos",
+      "payload": "{\"command_id\": \"CMD-E0101483\", \"event_id\": \"EVT-20261015-220152-KM118-1D40\", \"acao\": \"SUSPEITA\", \"timestamp\": \"2026-10-15T22:01:53-03:00\", \"tentativa\": 1}"
+    },
+    {
+      "id": 4,
+      "ts": "2026-10-15T22:01:54-03:00",
+      "direcao": "RX",
+      "topico": "motiva/rm565994/status",
+      "payload": "{\"tipo\": \"ACK\", \"command_id\": \"CMD-E0101483\", \"event_id\": \"EVT-20261015-220152-KM118-1D40\", \"acao\": \"SUSPEITA\", \"fase\": \"RECEBIDO\", \"estado\": \"NORMAL\", \"uptime_s\": 22}"
+    },
+    {
+      "id": 5,
+      "ts": "2026-10-15T22:01:54-03:00",
+      "direcao": "RX-INVALIDA",
+      "topico": "motiva/rm565994/status",
+      "payload": "{\"tipo\":\"ACK\",\"command_id\":\",\\\"command_id\\\":\\\"CMD-E0101483\\\",\\\"event_id\\\":\\\"EVT-20261015-220152-KM118-1D40\\\",\\\"acao\\\":\\\"SUSPEITA\\\",\\\"fase\\\":\\\"RECEBIDO\\\",\\\"estado\\\":\\\"NORMAL\\\",\\\"uptime_s\\\":22}1}\",\"event_id\":\"01483\\\",\\\"event_id\\\":\\\"EVT-20261015-220152-KM118-1D40\\\",\\\"acao\\\":\\\"SUSPEITA\\\",\\\"fase\\\":\\\"RECEBIDO\\\",\\\"estado\\\":\\\"NORMAL\\\",\\\"uptime_s\\\":22}1}\",\"acao\":\"52-KM118-1D40\\\",\\\"acao\\\":\\\""
+    },
+    {
+      "id": 6,
+      "ts": "2026-10-15T22:01:59-03:00",
+      "direcao": "TX",
+      "topico": "motiva/rm565994/comandos",
+      "payload": "{\"command_id\": \"CMD-E0101483\", \"event_id\": \"EVT-20261015-220152-KM118-1D40\", \"acao\": \"SUSPEITA\", \"timestamp\": \"2026-10-15T22:01:59-03:00\", \"tentativa\": 2}"
+    },
+    {
+      "id": 7,
+      "ts": "2026-10-15T22:02:00-03:00",
+      "direcao": "RX",
+      "topico": "motiva/rm565994/status",
+      "payload": "{\"tipo\": \"ACK\", \"command_id\": \"CMD-E0101483\", \"event_id\": \"EVT-20261015-220152-KM118-1D40\", \"acao\": \"SUSPEITA\", \"fase\": \"RECEBIDO\", \"estado\": \"NORMAL\", \"uptime_s\": 28}"
+    },
+    {
+      "id": 8,
+      "ts": "2026-10-15T22:02:00-03:00",
+      "direcao": "RX-INVALIDA",
+      "topico": "motiva/rm565994/status",
+      "payload": "{\"tipo\":\"ACK\",\"command_id\":\",\\\"command_id\\\":\\\"CMD-E0101483\\\",\\\"event_id\\\":\\\"EVT-20261015-220152-KM118-1D40\\\",\\\"acao\\\":\\\"SUSPEITA\\\",\\\"fase\\\":\\\"RECEBIDO\\\",\\\"estado\\\":\\\"NORMAL\\\",\\\"uptime_s\\\":28}2}stado\\\\\\\":\\\\\\\"NORMAL\\\\\\\",\\\\\\\"uptime_s\\\\\\\":22}1}\\\",\\\"event_id\\\":\\\"01483\\\\\\\",\\\\\\\"event_id\\\\\\\":\\\\\\\"EVT-20261015-220152-KM118-1D40\\\\\\\",\\\\\\\"acao\\\\\\\":\\\\\\\"SUSPEITA\\\\\\\",\\\\\\\"fase\\\\\\\":\\\\\\\"RECEBIDO\\\\\\\","
+    },
+    {
+      "id": 9,
+      "ts": "2026-10-15T22:02:05-03:00",
+      "direcao": "TX",
+      "topico": "motiva/rm565994/comandos",
+      "payload": "{\"command_id\": \"CMD-E0101483\", \"event_id\": \"EVT-20261015-220152-KM118-1D40\", \"acao\": \"SUSPEITA\", \"timestamp\": \"2026-10-15T22:02:05-03:00\", \"tentativa\": 3}"
+    },
+    {
+      "id": 10,
+      "ts": "2026-10-15T22:02:06-03:00",
+      "direcao": "RX",
+      "topico": "motiva/rm565994/status",
+      "payload": "{\"tipo\": \"ACK\", \"command_id\": \"CMD-E0101483\", \"event_id\": \"EVT-20261015-220152-KM118-1D40\", \"acao\": \"SUSPEITA\", \"fase\": \"RECEBIDO\", \"estado\": \"NORMAL\", \"uptime_s\": 34}"
+    },
+    {
+      "id": 11,
+      "ts": "2026-10-15T22:02:06-03:00",
+      "direcao": "RX-INVALIDA",
+      "topico": "motiva/rm565994/status",
+      "payload": "{\"tipo\":\"ACK\",\"command_id\":\",\\\"command_id\\\":\\\"CMD-E0101483\\\",\\\"event_id\\\":\\\"EVT-20261015-220152-KM118-1D40\\\",\\\"acao\\\":\\\"SUSPEITA\\\",\\\"fase\\\":\\\"RECEBIDO\\\",\\\"estado\\\":\\\"NORMAL\\\",\\\"uptime_s\\\":34}3}stado\\\\\\\":\\\\\\\"NORMAL\\\\\\\",\\\\\\\"uptime_s\\\\\\\":28}2}stado\\\\\\\\\\\\\\\":\\\\\\\\\\\\\\\"NORMAL\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"uptime_s\\\\\\\\\\\\\\\":22}1}\\\\\\\",\\\\\\\"event_id\\\\\\\":\\\\\\\"01483\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"event_id\\\\\\\\\\\\\\\":\\\\\\\\\\\\\\\"EVT-"
+    },
+    {
+      "id": 12,
+      "ts": "2026-10-15T22:03:09-03:00",
+      "direcao": "RX",
+      "topico": "motiva/rm565994/status",
+      "payload": "{\"tipo\": \"ONLINE\", \"online\": true, \"estado\": \"NORMAL\"}"
+    },
+    {
+      "id": 13,
+      "ts": "2026-10-15T22:03:12-03:00",
+      "direcao": "RX",
+      "topico": "motiva/rm565994/status",
+      "payload": "{\"tipo\": \"LWT\", \"online\": false}"
+    },
+    {
+      "id": 14,
+      "ts": "2026-10-15T22:03:28-03:00",
+      "direcao": "RX",
+      "topico": "motiva/rm565994/eventos",
+      "payload": "{\"schema\": \"motiva.evento.v1\", \"event_id\": \"EVT-20261015-220328-KM118-CB77\", \"versao\": 1, \"timestamp\": \"2026-10-15T22:03:28-03:00\", \"camera_id\": \"CAM-SP000-KM118-X\", \"local\": {\"rodovia\": \"SP-000 (fictícia)\", \"km\": 118.0, \"trecho\": \"Interseção com acesso municipal\", \"municipio\": \"Cidade Exemplo/SP\"}, \"tipo\": \"COLISAO_LATERAL\", \"confianca\": {\"valor\": 0.981, \"nivel\": \"ALTA\", \"limiar\": 0.6, \"componentes\": {\"aprox\": 1.0, \"impacto\": 1.0, \"persist\": 0.909, \"clareza\": 0.998}, \"definicao\": \"0..1 = soma ponderada (aprox 0,25; impacto 0,30; persistência 0,20; clareza do ângulo 0,25) x (0,4 + 0,6 x visibilidade). ALTA >= 0,80; MEDIA >= 0,60; BAIXA < 0,60 -> INDETERMINADO.\"}, \"indicadores\": {\"veiculos_envolvidos\": 2, \"faixa_obstruida\": [\"H-OESTE\", \"V-SUL\", \"V-NORTE\"], \"velocidade_relativa_kmh\": 49.8, \"impacto_alta_energia\": true, \"veiculos_parados_apos_contato\": true, \"angulo_trajetorias_graus\": 89.9, \"pedestres\": \"desconhecido\", \"visibilidade\": 1.0}, \"recomendacao\": {\"regra\": \"R3\", \"recurso\": \"AMBULANCIA_SIMULADA\", \"justificativa\": \"Sugerir atendimento por ambulância na simulação. Regra R3: Colisão lateral/traseira com indicador de impacto de alta energia (vel. relativa > 40 km/h). Indicadores: vel. relativa estimada 50 km/h; faixa obstruída: H-OESTE, V-SUL, V-NORTE; veículos envolvidos: 2.\"}, \"estado\": \"SUSPEITA\", \"evidencia\": {\"fonte\": \"seq_07.mp4\", \"frame\": 93, \"tempo_video_s\": 3.1, \"frame_decisao\": 113, \"imagem\": \"evidencias/EVT-20261015-220328-KM118-CB77.jpg\", \"clip\": \"evidencias/EVT-20261015-220328-KM118-CB77.mp4\"}}"
+    },
+    {
+      "id": 15,
+      "ts": "2026-10-15T22:03:28-03:00",
+      "direcao": "TX",
+      "topico": "motiva/rm565994/comandos",
+      "payload": "{\"command_id\": \"CMD-33775C29\", \"event_id\": \"EVT-20261015-220328-KM118-CB77\", \"acao\": \"SUSPEITA\", \"timestamp\": \"2026-10-15T22:03:28-03:00\", \"tentativa\": 1}"
+    },
+    {
+      "id": 16,
+      "ts": "2026-10-15T22:03:29-03:00",
+      "direcao": "RX",
+      "topico": "motiva/rm565994/status",
+      "payload": "{\"tipo\": \"ACK\", \"command_id\": \"CMD-33775C29\", \"event_id\": \"EVT-20261015-220328-KM118-CB77\", \"acao\": \"SUSPEITA\", \"fase\": \"RECEBIDO\", \"estado\": \"NORMAL\", \"uptime_s\": 26}"
+    },
+    {
+      "id": 17,
+      "ts": "2026-10-15T22:03:30-03:00",
+      "direcao": "RX",
+      "topico": "motiva/rm565994/status",
+      "payload": "{\"tipo\": \"ACK\", \"command_id\": \"CMD-33775C29\", \"event_id\": \"EVT-20261015-220328-KM118-CB77\", \"acao\": \"SUSPEITA\", \"fase\": \"APLICADO\", \"estado\": \"SUSPEITA\", \"uptime_s\": 26}"
+    },
+    {
+      "id": 18,
+      "ts": "2026-10-15T22:04:02-03:00",
+      "direcao": "TX",
+      "topico": "motiva/rm565994/comandos",
+      "payload": "{\"command_id\": \"CMD-E3685978\", \"event_id\": \"EVT-20261015-220328-KM118-CB77\", \"acao\": \"CONFIRMAR\", \"timestamp\": \"2026-10-15T22:04:02-03:00\", \"tentativa\": 1}"
+    },
+    {
+      "id": 19,
+      "ts": "2026-10-15T22:04:03-03:00",
+      "direcao": "RX",
+      "topico": "motiva/rm565994/status",
+      "payload": "{\"tipo\": \"ACK\", \"command_id\": \"CMD-E3685978\", \"event_id\": \"EVT-20261015-220328-KM118-CB77\", \"acao\": \"CONFIRMAR\", \"fase\": \"RECEBIDO\", \"estado\": \"SUSPEITA\", \"uptime_s\": 59}"
+    },
+    {
+      "id": 20,
+      "ts": "2026-10-15T22:04:03-03:00",
+      "direcao": "RX",
+      "topico": "motiva/rm565994/status",
+      "payload": "{\"tipo\": \"ACK\", \"command_id\": \"CMD-E3685978\", \"event_id\": \"EVT-20261015-220328-KM118-CB77\", \"acao\": \"CONFIRMAR\", \"fase\": \"APLICADO\", \"estado\": \"CONFIRMADO\", \"uptime_s\": 59}"
+    },
+    {
+      "id": 21,
+      "ts": "2026-10-15T22:04:16-03:00",
+      "direcao": "TX",
+      "topico": "motiva/rm565994/comandos",
+      "payload": "{\"command_id\": \"CMD-E3685978\", \"event_id\": \"EVT-20261015-220328-KM118-CB77\", \"acao\": \"CONFIRMAR\", \"timestamp\": \"2026-10-15T22:04:16-03:00\", \"tentativa\": 99}"
+    },
+    {
+      "id": 22,
+      "ts": "2026-10-15T22:04:17-03:00",
+      "direcao": "RX",
+      "topico": "motiva/rm565994/status",
+      "payload": "{\"tipo\": \"ACK\", \"command_id\": \"CMD-E3685978\", \"event_id\": \"EVT-20261015-220328-KM118-CB77\", \"acao\": \"CONFIRMAR\", \"fase\": \"RECEBIDO\", \"estado\": \"CONFIRMADO\", \"uptime_s\": 73}"
+    },
+    {
+      "id": 23,
+      "ts": "2026-10-15T22:04:18-03:00",
+      "direcao": "RX",
+      "topico": "motiva/rm565994/status",
+      "payload": "{\"tipo\": \"ACK\", \"command_id\": \"CMD-E3685978\", \"event_id\": \"EVT-20261015-220328-KM118-CB77\", \"acao\": \"CONFIRMAR\", \"fase\": \"DUPLICADO\", \"estado\": \"CONFIRMADO\", \"uptime_s\": 73}"
+    },
+    {
+      "id": 24,
+      "ts": "2026-10-15T22:04:20-03:00",
+      "direcao": "TX",
+      "topico": "motiva/rm565994/comandos",
+      "payload": "{\"command_id\": \"CMD-257DE743\", \"event_id\": \"EVT-20261015-220328-KM118-CB77\", \"acao\": \"ENCERRAR\", \"timestamp\": \"2026-10-15T22:04:20-03:00\", \"tentativa\": 1}"
+    },
+    {
+      "id": 25,
+      "ts": "2026-10-15T22:04:21-03:00",
+      "direcao": "RX",
+      "topico": "motiva/rm565994/status",
+      "payload": "{\"tipo\": \"ACK\", \"command_id\": \"CMD-257DE743\", \"event_id\": \"EVT-20261015-220328-KM118-CB77\", \"acao\": \"ENCERRAR\", \"fase\": \"RECEBIDO\", \"estado\": \"CONFIRMADO\", \"uptime_s\": 77}"
+    },
+    {
+      "id": 26,
+      "ts": "2026-10-15T22:04:21-03:00",
+      "direcao": "RX",
+      "topico": "motiva/rm565994/status",
+      "payload": "{\"tipo\": \"ACK\", \"command_id\": \"CMD-257DE743\", \"event_id\": \"EVT-20261015-220328-KM118-CB77\", \"acao\": \"ENCERRAR\", \"fase\": \"APLICADO\", \"estado\": \"NORMAL\", \"uptime_s\": 77}"
+    }
+  ]
+}

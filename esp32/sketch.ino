@@ -96,12 +96,15 @@ void ack(const char* cmdId, const char* eventId, const char* fase, const char* a
 void onMessage(char* topic, byte* payload, unsigned int len) {
   StaticJsonDocument<512> doc;
   if (deserializeJson(doc, payload, len)) { Serial.println("[RX] JSON inválido"); return; }
-  const char* acao = doc["acao"] | "";
+  // Cópias locais: o ArduinoJson (zero-copy) aponta para o buffer do PubSubClient,
+  // que é sobrescrito pelo publish() do primeiro ACK.
+  char acao[16], cmdId[24], evId[48];
+  strlcpy(acao, doc["acao"] | "", sizeof(acao));
+  strlcpy(cmdId, doc["command_id"] | "", sizeof(cmdId));
+  strlcpy(evId, doc["event_id"] | "", sizeof(evId));
   lastCentral = millis(); centralVista = true;          // qualquer mensagem da central conta como sinal de vida
   if (strcmp(acao, "PING") == 0) return;
 
-  const char* cmdId = doc["command_id"] | "";
-  const char* evId = doc["event_id"] | "";
   Serial.printf("[RX] %s cmd=%s ev=%s\n", acao, cmdId, evId);
   if (!*cmdId || !*evId) return;
 

@@ -1,0 +1,9 @@
+[central] painel em http://localhost:5000  tópicos motiva/rm565994/#
+ * Tip: There are .env files present. Install python-dotenv to use them.
+ * Serving Flask app 'app'
+ * Debug mode: off
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on http://127.0.0.1:5000
+Press CTRL+C to quit
+[central] conectado ao broker broker.hivemq.com rc=0
+127.0.0.1 - - [15/Oct/2026 22:01:28] "GET /api/state HTTP/1.1" 200 -

@@ -41,11 +41,7 @@
 
 <table>
   <tr><th style="width:30%">Integrante</th><th style="width:20%">RM</th><th>Turma</th></tr>
-  <tr><td><span class="todo">NOME DO INTEGRANTE 1</span></td><td><span class="todo">RM00000</span></td><td rowspan="5"><span class="todo">TURMA</span></td></tr>
-  <tr><td><span class="todo">NOME DO INTEGRANTE 2</span></td><td><span class="todo">RM00000</span></td></tr>
-  <tr><td><span class="todo">NOME DO INTEGRANTE 3</span></td><td><span class="todo">RM00000</span></td></tr>
-  <tr><td><span class="todo">NOME DO INTEGRANTE 4</span></td><td><span class="todo">RM00000</span></td></tr>
-  <tr><td><span class="todo">NOME DO INTEGRANTE 5</span></td><td><span class="todo">RM00000</span></td></tr>
+  <tr><td>Filippo Picino Mendez (responsável pela entrega)</td><td>RM565994</td><td><span class="todo">TURMA</span></td></tr>
 </table>
 
 <h3>Links para validação</h3>
@@ -115,7 +111,7 @@
   <tr><td>COLISAO_TRASEIRA</td><td>Contato entre dois veículos cujas trajetórias antes do impacto têm ângulo próximo de 0° (mesmo sentido), seguido de parada brusca. Também vale para veículo móvel atingindo um veículo parado alinhado ao seu eixo.</td></tr>
   <tr><td>COLISAO_FRONTAL</td><td>Contato com trajetórias opostas (ângulo próximo de 180°) e parada brusca.</td></tr>
   <tr><td>COLISAO_LATERAL</td><td>Contato com trajetórias aproximadamente perpendiculares (próximo de 90°), ou veículo móvel atingindo perpendicularmente o eixo de um veículo parado.</td></tr>
-  <tr><td>SEM_ACIDENTE</td><td>Nenhum candidato com evidência mínima. Publicado periodicamente em <code>motiva/&lt;RM&gt;/visao</code> como estado de monitoramento da câmera.</td></tr>
+  <tr><td>SEM_ACIDENTE</td><td>Nenhum candidato com evidência mínima. Publicado periodicamente em <code>motiva/rm565994/visao</code> como estado de monitoramento da câmera.</td></tr>
   <tr><td>INDETERMINADO</td><td>Evidência acima do mínimo, mas confiança abaixo do limiar, ângulo ambíguo ou visibilidade insuficiente. Também é emitido quando a visibilidade fica ruim por 2 s seguidos: a câmera "não consegue ver" e pede revisão humana.</td></tr>
 </table>
 <p><b>Limites:</b> capotamento e atropelamento não foram implementados. A câmera precisa ser fixa e a escala (m/px) e as faixas são configuradas por câmera. Com o veículo atingido parado, o sistema não sabe qual extremidade é a traseira; uma frontal contra veículo parado é classificada como traseira, com clareza reduzida em 20%. Colisões em ângulo intermediário (≈45° ou ≈135°) têm clareza baixa e tendem a INDETERMINADO. Envolvimento de 3 ou mais veículos é agregado na mesma ocorrência, mas a contagem continua sendo do par inicial. Nenhuma lesão ou gravidade é inferida.</p>
@@ -167,10 +163,10 @@
 <h2>7. Protocolo MQTT e registro de eventos</h2>
 <table>
   <tr><th>Tópico</th><th>Sentido</th><th>QoS</th><th>Retida</th><th>Mensagens</th></tr>
-  <tr><td><code>motiva/&lt;RM&gt;/eventos</code></td><td>visão → central</td><td>1</td><td>não</td><td>evento <code>motiva.evento.v1</code> (abaixo)</td></tr>
-  <tr><td><code>motiva/&lt;RM&gt;/visao</code></td><td>visão → central</td><td>0</td><td>não</td><td>a cada 2 s de vídeo: <code>{camera_id, fonte, tempo_video_s, visibilidade, saida: SEM_ACIDENTE|OCORRENCIA_ATIVA}</code></td></tr>
-  <tr><td><code>motiva/&lt;RM&gt;/comandos</code></td><td>central → ESP32</td><td>1</td><td>não</td><td><code>{command_id, event_id, acao: SUSPEITA|CONFIRMAR|REJEITAR|ENCERRAR, timestamp, tentativa}</code> e <code>{acao: PING}</code> a cada 5 s</td></tr>
-  <tr><td><code>motiva/&lt;RM&gt;/status</code></td><td>ESP32 → central</td><td>0</td><td>ONLINE e LWT: sim</td><td><code>ACK {command_id, event_id, acao, fase: RECEBIDO|APLICADO|DUPLICADO|IGNORADO_ENCERRADO, estado}</code>, <code>HEARTBEAT {estado, ativas, uptime_s, rssi}</code> a cada 5 s, <code>ONLINE</code> e LWT <code>{tipo: LWT, online: false}</code></td></tr>
+  <tr><td><code>motiva/rm565994/eventos</code></td><td>visão → central</td><td>1</td><td>não</td><td>evento <code>motiva.evento.v1</code> (abaixo)</td></tr>
+  <tr><td><code>motiva/rm565994/visao</code></td><td>visão → central</td><td>0</td><td>não</td><td>a cada 2 s de vídeo: <code>{camera_id, fonte, tempo_video_s, visibilidade, saida: SEM_ACIDENTE|OCORRENCIA_ATIVA}</code></td></tr>
+  <tr><td><code>motiva/rm565994/comandos</code></td><td>central → ESP32</td><td>1</td><td>não</td><td><code>{command_id, event_id, acao: SUSPEITA|CONFIRMAR|REJEITAR|ENCERRAR, timestamp, tentativa}</code> e <code>{acao: PING}</code> a cada 5 s</td></tr>
+  <tr><td><code>motiva/rm565994/status</code></td><td>ESP32 → central</td><td>0</td><td>ONLINE e LWT: sim</td><td><code>ACK {command_id, event_id, acao, fase: RECEBIDO|APLICADO|DUPLICADO|IGNORADO_ENCERRADO, estado}</code>, <code>HEARTBEAT {estado, ativas, uptime_s, rssi}</code> a cada 5 s, <code>ONLINE</code> e LWT <code>{tipo: LWT, online: false}</code></td></tr>
 </table>
 <p><b>QoS e retenção:</b> eventos e comandos usam QoS 1 (pelo menos uma entrega). Duplicatas são esperadas e tratadas por id. Eventos e comandos <b>não são retidos</b>, para que um cliente reconectado não receba de novo uma ocorrência antiga. Só a presença do ESP32 (ONLINE/LWT) é retida. O PubSubClient publica apenas em QoS 0, então a confiabilidade ESP32 → central vem do ACK de aplicação: a central retransmite o mesmo <code>command_id</code> a cada 6 s, até 3 vezes, e depois marca SEM_CONFIRMACAO.</p>
 <p><b>Duplicatas:</b> (1) a visão emite um event_id por ocorrência e republica apenas como nova <code>versao</code>; (2) a central faz upsert por <code>event_id</code> e ignora versões menores ou iguais à armazenada (registra DUPLICATA_IGNORADA); (3) o ESP32 ignora <code>command_id</code> repetido e não reabre eventos encerrados.</p>

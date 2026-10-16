@@ -5,3 +5,4 @@ results/*.db
 results/*.db-journal
 results/integracao/*.db
 results/central_live.log
+CP3-MORGS.pdf
